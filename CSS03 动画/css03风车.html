@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    
+    .box {
+        width: 250px;
+        height: 250px;
+        margin: 50px auto;
+    }
+
+    @keyframes fc_run {
+        0% {
+        }
+        /* 20% {
+            transform-origin: left top;
+            transform: rotate(360deg);
+        }
+        40% {
+            transform-origin: right bottom;
+            transform: rotate(360deg);
+        }
+        60% {
+            transform-origin: right top;
+            transform: rotate(360deg);
+        }
+        80% {
+            transform-origin: left bottom;
+            transform: rotate(360deg);
+        } */
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .box img {
+        animation-name: fc_run;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    
+    </style>
+
+</head>
+<body>
+    
+    <div class="box">
+        <img src="./images/fc.png" alt="">
+    </div>
+
+
+
+</body>
+</html>
