@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 500px;
+      height: 200px;
+      border: 2px dashed #da58a8;
+      margin: 100px auto;
+    }
+
+    .nav::after,
+    .nav::before {
+      content: "";
+      clear: both;
+      display: block;
+    }
+
+    .nav li {
+      float: left;
+      width: 100px;
+      height: 40px;
+      border-bottom: 2px solid pink;
+      border-right: 2PX solid pink;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      color: rgb(16, 93, 93);
+    }
+
+    .active {
+      background-color: #db43a1;
+    }
+
+    .row>.content {
+      height: 127px;
+      padding-top: 30px;
+      color: rgb(118, 44, 187);
+      background-color: rgb(214, 116, 238);
+      border-top: 1px solid purple;
+      display: none;
+    }
+
+    .row .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <ul class="nav">
+      <li class="active">书籍</li>
+      <li>影音</li>
+      <li>零食</li>
+    </ul>
+    <div class="row">
+      <div class="content show">《三国演义》、《红楼梦》、《西游记》、《水浒传》</div>
+      <div class="content">《反弹风暴》、《复仇者联盟》、《一条狗的使命》</div>
+      <div class="content">&nbsp;&nbsp;薯片、可乐、爆米花、鸡翅</div>
+    </div>
+  </div>
+</body>
+<script>
+  /*
+    页面效果 : 当鼠标移入tab栏时,当前tab有颜色,并且切换内容
+*/
+  /*
+    这是以前的写法
+  //获取元素
+  let lis = document.querySelectorAll('.nav > li');
+  let contents = document.querySelectorAll('.row > .content');
+  //注册鼠标移入事件
+  lis.forEach((e,i) => {
+    e.onmouseover = function() {
+      //利用排他思想,把每个li设置普通,移除active
+      lis.forEach(e => {
+        e.classList.remove('active');
+      })
+      //设置当前的自己有妖艳
+      this.classList.add('active');
+      //利用排他思想,把每个内容移除show
+      contents.forEach(e => {
+        e.classList.remove('show');
+      })
+      //设置当前的内容显示
+      contents[i].classList.add('show');
+    }
+  })
+  */
+
+  /*现在使用面向对象的方式实现tab栏效果*/
+  /*
+    封装面向对象的代码步骤
+    1.抽象出个类
+    2.在类的语法上封装属性和方法
+    3.new一个对象,调用对象的属性和方法来实现效果
+  */
+
+  //抽象出个类
+  class Tag {
+    constructor(options) {
+      /*
+      在代码中会变化的的东西都可以说是对象的属性
+      1.li的选择器  --> navSelector
+      2.content的选择器 --> contentSelector
+      3.事件类型 -- > type
+      4.li的特殊类名  --> navClass
+      5.content显示的类名  --> contentClass
+      */
+      //设置默认属性
+      options = options || {};
+      this.navSelector = options.navSelector || '.nav > li';
+      this.contentSelector = options.contentSelector || '.row > .content';
+      this.type = options.type || 'mouseover';
+      this.navClass = options.navClass || 'active';
+      this.contentClass = options.contentClass || 'show';
+    }
+    //设置鼠标移入方法
+    addEvent() {
+      //获取元素
+      let lis = document.querySelectorAll(this.navSelector);
+      let contents = document.querySelectorAll(this.contentSelector);
+      //先用一个变量保存这里的this
+      let _this = this;
+      //注册鼠标移入事件
+      lis.forEach((e, i) => {
+        //方法里面推荐使用addEventListener的方法注册事件
+        e.addEventListener(this.type, function () {
+          //利用排他把每个li设置普通
+          lis.forEach(e => {
+            e.classList.remove(_this.navClass);
+          })
+          //设置当前的自己妖艳
+          this.classList.add(_this.navClass);
+          //利用排他把每个图片都隐藏先
+          contents.forEach(e => {
+            e.classList.remove(_this.contentClass);
+          })
+          //设置当前自己的内容显现
+          contents[i].classList.add(_this.contentClass);
+        })
+      })
+    }
+  }
+
+  //new个对象出来调用方法
+  let tag = new Tag();
+  tag.addEvent();
+</script>
+
+</html>

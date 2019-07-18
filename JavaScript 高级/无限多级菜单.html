@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    ul {
+      list-style: none;
+      max-width: 300px;
+      background-color: #000;
+      padding: 4px;
+    }
+
+    li {
+      margin-top: 4px;
+      padding-left: 10px;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px dashed #fff;
+      font-size: 24px;
+    }
+
+    a::before {
+      content: "☆"
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="nav">
+      <!-- <ul>
+        <li>
+          <a href="#">一级菜单</a>
+          <ul>
+            <li>
+              <a href="#">二级菜单</a>
+              <ul></ul>
+            </li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+        <li></li>
+        <li></li>
+      </ul> -->
+    </div>
+  </div>
+</body>
+<script>
+ let navData = [
+    { id: 1, text: '一级菜单A', parentId: null },
+    { id: 2, text: '一级菜单B', parentId: null },
+    { id: 3, text: '一级菜单C', parentId: null },
+    { id: 4, text: '二级菜单AA', parentId: 1 },
+    { id: 5, text: '二级菜单AB', parentId: 1 },
+    { id: 6, text: '二级菜单AC', parentId: 1 },
+    { id: 7, text: '二级菜单BA', parentId: 2 },
+    { id: 8, text: '二级菜单BB', parentId: 2 },
+    { id: 9, text: '二级菜单BC', parentId: 2 },
+    { id: 10, text: '二级菜单CA', parentId: 3 },
+    { id: 11, text: '二级菜单CB', parentId: 3 },
+    { id: 12, text: '二级菜单CC', parentId: 3 },
+    { id: 13, text: '三级菜单AAA', parentId: 4 },
+    { id: 14, text: '三级菜单BAA', parentId: 7 },
+    { id: 15, text: '三级菜单CAA', parentId: 10 }
+  ];
+
+//先用递归生成dom树状结构的数组
+function fn(arr,id) {
+  //创建一个空数组
+  let temp = [];
+  //遍历数组
+  arr.forEach(e => {
+    if(e.parentId === id) {
+      temp.push(e);
+      e.children = fn(arr,e.id)
+    }
+  })
+  return temp;
+}
+let res = fn(navData,null);
+// console.log(res);
+//获取元素
+let nav = document.querySelector('.nav');
+function fn2(parent,arr) {
+  //创建一个ul
+  let ul = document.createElement('ul');
+  //给ul设置父元素
+  parent.appendChild(ul);
+  //先把生成的ul都隐藏先
+  ul.classList.add('hide');
+  //遍历数组,动态生成结构
+  arr.forEach(e => {  
+    //创建一个li
+    let li = document.createElement('li');
+    //往li里面添加结构
+    li.innerHTML = `<a href ="#">${e.text}</a>`;
+    //给li设置父元素
+    ul.appendChild(li);
+    if(e.children.length !== 0) {
+      fn2(li,e.children)
+    }
+  })
+}
+fn2(nav,res);
+
+//注册鼠标点击事件
+//把一级菜单的ul显示出来
+nav.children[0].classList.remove('hide')
+//由于结构都是动态生成的,要使用事件委托
+nav.onclick =function(e) {
+  //判断触发目标
+  if(e.target.parentNode.children.length != 1) {
+    if(e.target.nodeName === 'A') {
+      e.target.parentNode.children[1].classList.toggle('hide');
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

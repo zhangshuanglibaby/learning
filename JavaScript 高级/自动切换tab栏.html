@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 500px;
+      height: 200px;
+      border: 2px dashed #da58a8;
+      margin: 100px auto;
+    }
+
+    .nav::after,
+    .nav::before {
+      content: "";
+      clear: both;
+      display: block;
+    }
+
+    .nav li {
+      float: left;
+      width: 100px;
+      height: 40px;
+      border-bottom: 2px solid pink;
+      border-right: 2PX solid pink;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      color: rgb(16, 93, 93);
+    }
+
+    .active {
+      background-color: #db43a1;
+    }
+
+    .row>.content {
+      height: 127px;
+      padding-top: 30px;
+      color: rgb(118, 44, 187);
+      background-color: rgb(214, 116, 238);
+      border-top: 1px solid purple;
+      display: none;
+    }
+
+    .row .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <ul class="nav">
+      <li class="active">书籍</li>
+      <li>影音</li>
+      <li>零食</li>
+    </ul>
+    <div class="row">
+      <div class="content show">《三国演义》、《红楼梦》、《西游记》、《水浒传》</div>
+      <div class="content">《反弹风暴》、《复仇者联盟》、《一条狗的使命》</div>
+      <div class="content">&nbsp;&nbsp;薯片、可乐、爆米花、鸡翅</div>
+    </div>
+  </div>
+</body>
+
+<script src="./js/封装tab栏代码.js"></script>
+<script>
+  /*
+    效果：tab栏自动切换
+
+    应用 :  class的继承 、 定时器
+*/
+
+//抽象出个类
+class AutoTag extends Tag {
+  constructor(options) {
+    super(options)
+    /*
+      定时器的定时事件是属性
+    */
+    //设置属性
+    options = options || {};
+    this.interval = options.interval || 1000;
+  }
+  //封装自动播放方法
+  autoPlay() {
+    //自动播放实际是让索引自动增加
+    //获取元素
+    let lis = document.querySelectorAll(this.navSelector);
+    let contents = document.querySelectorAll(this.contentSelector);
+    //用一个变量表示当前的索引
+    let index = 0;
+    //设置定时器
+    setInterval(() => {
+      //设置当索引是2的时候,返回到0
+      if(index === 2) {
+        index = 0;
+      }else {
+        index++
+      };
+      //设置每个li都是普通
+      // lis.forEach(e => {
+      //   e.classList.remove(this.navClass);
+      // })     
+      // //设置让当前的li妖艳
+      // lis[index].classList.add(this.navClass);
+      //调用changeNavClass 方法
+      this.changeNavClass(lis,lis[index]);
+      //设置让每个内容都隐藏先
+      // contents.forEach(e => {
+      //   e.classList.remove(this.contentClass);
+      // }) 
+      // //让当前的内容显现
+      // contents[index].classList.add(this.contentClass);  
+      //调用 changeContentClass 方法
+      this.changeContentClass(contents,contents[index]);
+    },this.interval)
+  }
+}
+//new实例对象执行方法
+let auto = new AutoTag();
+auto.addEvent();
+auto.autoPlay();
+
+
+
+
+
+</script>
