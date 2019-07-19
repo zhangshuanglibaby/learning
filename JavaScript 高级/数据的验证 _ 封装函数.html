@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    input {
+      outline: none;
+      border: 1px solid #333;
+    }
+
+    .form {
+      width: 400px;
+      margin: 100px auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      padding: 0 10px;
+      line-height: 55px;
+    }
+
+    .f2 {
+      flex: 2;
+    }
+
+    .f3 {
+      flex: 3;
+    }
+
+    .control {
+      display: inline-block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form">
+    <form action="" id="registerForm" method="get">
+      <div class="row">
+        <div class="cell f2">请输入用户名：</div>
+        <div class="cell f3"><input type="text" class="control" name="userName"></div>
+      </div>
+      <div class="row">
+        <div class="cell f2">请输入密码：</div>
+        <div class="cell f3"><input type="text" class="control" name="password"></div>
+      </div>
+      <div class="row">
+        <div class="cell f2">请输入手机号码：</div>
+        <div class="cell f3"><input type="text" class="control" name="phoneNumber"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="cell f2"></div>
+        <div class="cell f3">
+          <input type="submit" class="btn" value="提交">
+        </div>
+      </div>
+
+    </form>
+  </div>
+</body>
+<script>
+  /*
+效果:
+    当点击提交时
+      验证用户名
+      1.用户名不能为空
+      2.用户名不能少于6个字符
+
+      验证密码
+      1.密码不能为空
+      2.密码不能少于个字符
+
+      验证手机号码
+      1.手机号码不能为空
+      2.要满足手机号码的规律
+        1开头   11位数字  --利用正则表达
+*/
+  /*
+    获取表单里面的控件的技巧
+    只要表单控件带有name属性,就可以直接使用表单对象
+    form.name属性的值可以获取对应表单控件
+  */
+
+  /*
+  普通的方法缺点: 代码没有重复的使用,有很多的判断
+
+  解决办法:把判断抽离出来,封装到函数里面,函数的返回值就是错误的提示,
+          调用函数,判断是否有错误的信息,如果有才阻止跳转
+  */
+
+  //获取属性
+  let form = document.querySelector('#registerForm');
+  let btn = document.querySelector('.btn');
+  // console.log(form.userName);
+
+  /*
+  if(form.userName.value === '') {
+    e.preventDefault();
+    alert('用户名不能为空喔');
+    return;
+  }
+  */
+  //把每个判断都封装到函数里面
+  //1.判断空值 --> 变量是表单控件,错误提示
+  function isNonEmpty(value,errMsg) {
+    if(value === '') {
+      return errMsg;
+    }
+  };
+
+  //2.判断字符长度  -->变量是表单控件,字符长度,错误提示
+  function minLength(value,len,errMsg) {
+    if(value.length < len) {
+      return errMsg;
+    }
+  };
+
+
+//把要验证的函数以数组的形式存储
+let validateFuns = [function() {
+  return isNonEmpty(form.userName.value,'用户名不能为空喔');
+},function() {
+  return minLength(form.userName.value,6,'用户名不能少于6位字符喔');
+},function() {
+  return isNonEmpty(form.password.value,'密码不能为空喔');
+},function() {
+  return minLength(form.password.value,8,'密码不能少于8位字符喔');
+},function() {
+  return isNonEmpty(form.phoneNumber.value,'手机号码不能为空喔');
+}];
+
+//封装一个验证的函数
+function validate() {
+  //要for循环validDateFuns这个数组
+  for(let i = 0; i < validateFuns.length; i++) {
+    //用一个变量来保存函数的返回值
+    let errMsg = validateFuns[i]();
+    //如果返回的是字符串则是true,返回错误信息,如果是undefined,则不执行
+    if(errMsg) {
+      return errMsg;
+    }
+  }
+}
+
+//注册点击事件
+btn.onclick = function(e) {
+  // e.preventDefault();
+  //点击提交时,调用验证的方法,如果返回的值是错误信息,则阻止跳窗,否则不执行
+  //声明一个变量保存调用验证方法的返回值
+  let errMsg = validate();
+  if(errMsg) {
+    //如果errMsg返回的是错误信息,则是true
+    e.preventDefault();
+    alert(errMsg);
+  }
+}
+  
+</script>
+
+</html>

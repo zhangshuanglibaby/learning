@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    input {
+      outline: none;
+      border: 1px solid #333;
+    }
+
+    .form {
+      width: 400px;
+      margin: 100px auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      padding: 0 10px;
+      line-height: 55px;
+    }
+
+    .f2 {
+      flex: 2;
+    }
+
+    .f3 {
+      flex: 3;
+    }
+
+    .control {
+      display: inline-block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form">
+    <form action="" id="registerForm" method="get">
+      <div class="row">
+        <div class="cell f2">请输入用户名：</div>
+        <div class="cell f3"><input type="text" class="control" name="userName"></div>
+      </div>
+      <div class="row">
+        <div class="cell f2">请输入密码：</div>
+        <div class="cell f3"><input type="text" class="control" name="password"></div>
+      </div>
+      <div class="row">
+        <div class="cell f2">请输入手机号码：</div>
+        <div class="cell f3"><input type="text" class="control" name="phoneNumber"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="cell f2"></div>
+        <div class="cell f3">
+          <input type="submit" class="btn" value="提交">
+        </div>
+      </div>
+
+    </form>
+  </div>
+</body>
+<script>
+  /*
+效果:
+    当点击提交时
+      验证用户名
+      1.用户名不能为空
+      2.用户名不能少于6个字符
+
+      验证密码
+      1.密码不能为空
+      2.密码不能少于个字符
+
+      验证手机号码
+      1.手机号码不能为空
+      2.要满足手机号码的规律
+        1开头   11位数字  --利用正则表达
+*/
+/*
+  获取表单里面的控件的技巧
+  只要表单控件带有name属性,就可以直接使用表单对象
+  form.name属性的值可以获取对应表单控件
+*/
+
+//获取属性
+let form = document.querySelector('#registerForm');
+let btn = document.querySelector('.btn');
+// console.log(form.userName);
+
+//注册事件
+btn.onclick = function(e) {
+  if(form.userName.value === '') {
+    e.preventDefault();
+    alert('用户名不能为空喔');
+    return;
+  }
+  if(form.userName.value.length < 6) {
+    e.preventDefault();
+    alert('用户名不能少于6位字符喔');
+    return;
+  }
+  if(form.password.value === '') {
+    e.preventDefault();
+    alert('密码不能为空喔');
+    return;
+  }
+  if(form.password.value.length < 8) {
+    e.preventDefault();
+    alert('密码不能少于8位字符喔');
+    return;
+  }
+  if(form.phoneNumber.value === '') {
+    e.preventDefault();
+    alert('手机号码不能为空喔');
+    return;
+  }
+}
+
+
+
+
+
+
+
+</script>
+
+</html>
