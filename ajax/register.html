@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>表单注册</title>
+  <style>
+    form {
+      padding-top: 100px;
+      padding-left: 100px;
+    }
+
+    form>* {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    form-item input {
+      height: 32px;
+      border: none;
+      width: 500px;
+      box-shadow: 0 0 0 1px #e7e7e7 inset;
+      text-indent: 8px;
+    }
+
+    .pre_register,
+    .register {
+      display: inline-block;
+      width: 120px;
+      line-height: 40px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: none;
+      margin-left: 100px;
+    }
+
+    .register {
+      background-color: dodgerblue;
+      border: none;
+      outline: none;
+    }
+
+    .register:hover {
+      background-color: deepskyblue;
+    }
+
+    .disable {
+      background-color: #666;
+    }
+
+    .error::after {
+      position: absolute;
+      top: 50%;
+      transform: translate(8px, -50%);
+      color: rgb(224, 51, 51);
+      content: attr(data-error);
+    }
+
+    .correct::after {
+      position: absolute;
+      top: 50%;
+      transform: translate(8px, -50%);
+      color: rgb(95, 238, 95);
+      content: attr(data-correct);
+    }
+
+    form-item {
+      display: block;
+    }
+
+    #toast {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 9;
+    }
+
+    #toast span {
+      padding: 8px 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 4px;
+      -webkit-user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form>
+    <form-item class="name">
+      用&ensp;户&ensp;名：<input type="text" placeholder="请输入用户名" name='name' required="true" />
+    </form-item>
+
+    <form-item class="pwd">
+      密&emsp;&emsp;码：<input type="password" placeholder="请输入密码" name='pwd' required="true" />
+    </form-item>
+
+    <form-item class="repwd">
+      确认密码：<input type="password" placeholder="请输入密码" required="true" />
+    </form-item>
+
+    <input type="submit" class="register" value="注册">
+  </form>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/extend.js"></script>
+<script>
+  // jq getError 方法，在元素后方显示错误提示，用法 $('tag').getError('信息')
+
+  // jq getCorrect 方法，在元素后方显示错误提示，用法 $('tag').getCorrect('信息')
+
+  // jq checkForm 方法，检测表单是否有错误存在，有错误返回false, 否则返回true, 用法 $(表单元素).checkForm()
+
+  // jq toast 方法, 弹出小黑提示框，用法 $.fn.toast('信息')
+
+  // serialize 方法, 格式化post提交的参数，用法 serialize(表单元素)
+
+/*
+需求 :实现注册功能
+      1.判断用户名是否可以使用
+      2.两次密码是否一致
+      3.如果表单错误点击提交显示错误信息窗口
+      4.如果注册成功,弹出注册成功窗口
+*/
+
+//检测用户名是否可以可以使用
+//监听表单控件失焦事件
+$('.name input').on('blur',function() {
+  //检测用户名是否有内容,提示下一步信息
+  if(!$(this).val()) {
+    //如果用户名没有输入,则终止下一步
+    return;
+  }else {
+    //创建ajax实例对象
+    let xhr = new XMLHttpRequest();
+    //准备打开请求地址 + url参数name:需要验证的用户名
+    xhr.open('get','http://127.0.0.1:8080/isUserNameExist?name=' + $(this).val());
+    //发送请求
+    xhr.send();
+    //监听通信状态
+    xhr.onreadystatechange = () => {
+      //检测服务器的响应是否完成&服务器的响应是否正常
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        //获取数据--把json字符串转成对象
+        let data = JSON.parse(xhr.responseText);
+        //200是可以使用,401是不可以使用
+        if(data.code === 200) {
+          //在元素后方显示提示
+          $('.name').getCorrect(data.msg);
+        }else {
+          //在元素后方显示提示
+          $('.name').getError(data.msg);
+        }
+      }
+    }
+  
+  
+  
+  
+  }
+})
+
+
+//检测两次密码是否一致
+//监听确认密码的失焦事件
+$('.repwd input').on('blur',function() {
+  if($('.pwd input').val() !== $(this).val()) {
+    //两次密码不一致则在元素后方显示错误提示
+    $('.repwd').getError('亲,您输入的两次密码不一致呢');
+  }else {
+    //一致则在元素后方显示正确信息
+    $('.repwd').getCorrect('亲,您的两次密码都一致呢');
+  }
+})
+
+
+//监听表单的提交事件 --- 用到submit事件
+$('form').on('submit',function(e) {
+  //阻止窗口的默认时间
+  e.preventDefault();
+  //检测表单是否有错误
+  if(!$(this).checkForm()) {
+    //检测错误则弹出小黑框提示
+    $.fn.toast('小坏蛋,你要正确填写信息啦');
+  }else {
+    //创建ajax实例对象
+    let xhr = new XMLHttpRequest();
+    //准备打开请求地址
+    xhr.open('post','http://127.0.0.1:8080/doRegister');
+    //设置请求头
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    //把表格转化成 键=值&键=值格式
+    let params = serialize($(this));
+    //把params作为send的参数
+    xhr.send(params);
+    //监听通信状态
+    xhr.onreadystatechange = () => {
+      //检测服务器的响应是否完成 & 服务器的响应是否正常
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        //获取数据
+        let data = JSON.parse(xhr.responseText);
+        if(data.code === 200) {
+          alert(data.msg);
+        }
+      }
+    }
+  }
+})
+
+
+</script>
+ 
+</html>
