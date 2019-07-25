@@ -1,0 +1,146 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hero - Admin</title>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <style>
+    .hero-list img {
+      width: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="page-header container">
+      <h1>王者荣耀 <small>英雄管理器</small></h1>
+    </div>
+  </header>
+  <div class="container hero-list">
+    <form id='myform'>
+      <input type="hidden" name="img" value="0.jpg" id="headSrc">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td>姓名：</td>
+            <td><input type="text" name="name"></td>
+          </tr>
+          <tr>
+            <td>性别：</td>
+            <td><input id="nan" checked name="gender" value="男" type="radio"><label for="nan">男</label>
+              <input name="gender" value="女" type="radio" id="nv"><label for="nv">女</label></td>
+          </tr>
+          <tr>
+            <td>头像：</td>
+            <td><img src="../../前端与开发的课件/ajaxAPIServer/static/images/0.jpg" alt="" id="photo" width="100">
+              <input type="file" id="img"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input class="btn btn-primary" type="button" id="sub" value="新增"></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">提水</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            新增失败
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="./js/jquery.js"></script>
+<script>
+  /*
+    需求 :  1.图片上传到服务器
+            2.实现新增用户信息
+  */
+
+  /*
+    实现效果1. 图片上传到服务器
+       步骤 ：1.注册选择文件的change事件--change事件是在表单控件的value值发生改变后触发的
+              2.获取当前的文件的数据--利用按钮的files的属性--可以获取当前的文件数据
+              3.把文件的数据转成文件流 ---利用FormData
+              4.发送ajax请求---修改contentType,processData属性
+              5.响应成功后,修改图片的路径,还有隐藏域的图片name是img的value值
+  
+  */
+  $('#img').on('change',function() {
+    //获取当前的文件的数据
+    let file = this.files[0]; //返回的是FileList伪数组
+    // console.log(file);
+    //把文件转成文件流
+    let fd = new FormData();
+    fd.append('pic',file);
+    $.ajax({
+      type : 'post',
+      url : 'http://127.0.0.1:8080/uploadHeadImg',
+      data : fd,
+      //fd文件流会自动设置请求头,告诉jq不要动我的请求头
+      contentType : false,
+      //jq会自动把对象的数据类型转成键值形式,fd文件流不需要转成键值形式
+      processData : false,
+      success : function(res) {
+        console.log(res);
+        //修改图片的路径
+        $('#photo').attr('src','../../前端与开发的课件/ajaxAPIServer' + res.baseDir + res.filePath);
+        //修改隐藏域name是img的value,后面新增的时候需要格式化表单需要用到
+        $('#headSrc').val(res.filePath);
+      }
+    })
+  })
+
+
+/*
+  实现效果  2.实现新增用户信息
+       步骤 ：1.注册按钮的点击事件
+             2.交互常识,检测内容非空
+             3.把表单格式化转成键值形式
+             4.发送ajax请求
+*/
+$('#sub').on('click',() => {
+  //检测内容非空
+  if($('.table input[type=text]').val().trim().length === 0) {
+    alert('用户名不能为空喔');
+    return;
+  }
+  //把表单转成键值形式,这时,要设置radio的默认值,还要设置name是img的value的值
+  let params = $('form').serialize();
+  // console.log(params);
+  //发送ajax请求
+  $.ajax({
+    type : 'post',
+    url : 'http://127.0.0.1:8080/addNewHero',
+    data : params,
+    success : function(res) {
+      console.log(res);
+      alert(res.msg);
+      //跳转页面
+      location.href = './index.html';
+    }
+  })
+})
+
+
+</script>
+
+</html>

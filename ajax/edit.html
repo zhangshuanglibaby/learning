@@ -1,0 +1,280 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hero - Admin</title>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <style>
+    .hero-list img {
+      width: 50px;
+    }
+
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .3);
+    }
+
+    .progress {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 20px;
+      transform: translate(-50%, -50%)
+    }
+
+    .progress-bar {
+      font-size: 22px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="page-header container">
+      <h1>王者荣耀 <small>英雄管理器</small></h1>
+    </div>
+  </header>
+  <div class="container hero-list">
+    <form id="form">
+      <input type="hidden" id="id" name='id' value="1">
+      <input type="hidden" name="img" id="headSrc" value="">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td>姓名：</td>
+            <td><input type="text" id="name" name="name" value=""></td>
+          </tr>
+          <tr>
+            <td>性别：</td>
+            <td>
+              <input id="nan" name="gender" value="男" type="radio" checked><label for="nan">男</label>
+              <input name="gender" value="女" type="radio" id="nv"><label for="nv">女</label>
+            </td>
+          </tr>
+          <tr>
+            <td>头像：</td>
+            <td><img src="../../前端与开发的课件/ajaxAPIServer/static/images/0.jpg" alt="" id="photo" width="100">
+              <input type="file" id="img"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="button" class="btn btn-primary" id="sub" value="完成"></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <div class="mask" hidden></div>
+  <div class="progress" hidden>
+    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+      aria-valuemax="100">0%</div>
+  </div>
+
+  <!-- 上传失败的窗口 -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">提示</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              你确定要删除吗？
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <!-- <button type="button" id="btn-sure" class="btn btn-primary">确定</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <!-- 修改成功的窗口 -->
+  <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">提示</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              你确定要删除吗？
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" id="btn-sure" class="btn btn-primary">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/获取url后面id.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script>
+  /*
+  需求 : 1.点击修改,根据id获取英雄数据
+         2.编辑后的图片上传
+         3.用户编辑提交
+*/
+
+  /*
+    实现效果1.点击修改,根据id获取英雄数据
+          步骤: 1.需要获取url地址栏的id
+                2.发送ajax数据到服务器获取数据
+                3.得到数据后,修改页面的内容
+                  记得要修改隐藏域的name是id和img的控件的val,后面需要用到
+  */
+  //获取url地址栏的id
+  let params = kits.getUrlParams();
+  let id = params.id;
+  //发送ajax
+  $.ajax({
+    url: 'http://127.0.0.1:8080/getHeroById',
+    data: {
+      id
+    },
+    success: function (res) {
+      // console.log(res);
+      if (res.code === 200) {
+        //修改用户名的内容
+        $('#name').val(res.data.name);
+        //由于页面默认是radio是男的,检测如果获取的性别是女,则切换女的radio
+        if (res.data.gender === '女') {
+          $('#nv').prop('checked', true);
+        }
+        //修改图片的路径
+        $('#photo').attr('src', '../../前端与开发的课件/ajaxAPIServer/static/images/' + res.data.img);
+        //也要把隐藏域的name是img修改value,后面提交时需要用到
+        $('#headSrc').val(res.data.img);
+        //也要把隐藏域的name是id修改value,后面提交时需要用到
+        $('#id').val(res.data.id);
+      }
+    }
+  })
+
+
+  /*
+    实现效果2.编辑后的图片上传
+        步骤 ： 1.监听按钮的change事件  --change是在表单控件value值发生变化后触发的
+                2.获取文件的数据 --- 利用files属性
+                3.把文件的数据转成文件流 -- 利用FormData
+                4.发送ajax请求
+                5.jq的ajax有个上传的事件 xhr.upload.onparogress
+                6.调用bootstrap的进度条
+  */
+  $('#img').on('change', function () {
+    //获取文件的数据
+    let file = this.files[0]; //返回的是FileList伪数组
+    // console.log(file);
+    //把文件的数据转成文件流
+    let fd = new FormData();
+    fd.append('pic', file);
+    //把遮罩和进度条显示
+    $('.mask').removeAttr('hidden');
+    $('.progress').removeAttr('hidden');
+    //发送ajax
+    $.ajax({
+      type: 'post',
+      url: 'http://127.0.0.1:8080/uploadHeadImg',
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: function (res) {
+        console.log(res);
+        if (res.code === 200) {
+          //修改图片的路径
+          $('#photo').attr('src', '../../前端与开发的课件/ajaxAPIServer/' + res.baseDir + res.filePath);
+          //修改name是img的value
+          $('#headSrc').val(res.filePath);
+        }
+      },
+      //jq的ajax中有个xhr的参数,这个参数有个上传事件 upload.onprogress ----记得一定要return  xhr
+      xhr: function () {
+        let xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = function (e) {
+          let persent = parseInt(e.loaded / e.total * 100) + '%';
+          //设置进度条
+          $('.progress-bar').width(persent);
+          //设置进度条的内容
+          $('.progress-bar').text(persent);
+        }
+        return xhr;
+      },
+
+      //jq的ajax中有个compelet的参数--会在请求完成的时候执行
+      //不管是成功还是失败,这个函数都会执行
+      complete: function () {
+        //把遮罩和进度隐藏
+        $('.mask').attr('hidden',true);
+        $('.progress').attr('hidden',true);
+        //在实行完的时候,要把进度条变0,否则下次上传的时候,还是会返回之前的进度
+        $('.progress-bar').width(0);
+      },
+
+      //jq的ajax中,还有有个出错的回调函数
+      error : function() {
+        $('#modelId').modal();
+        $('#modelId .container-fluid').text('请求失败,请重试') ;
+      }
+    })
+  })
+
+
+
+/*
+  实现效果3.用户编辑提交
+       步骤 ：1.注册按钮的点击事件 
+             2.把表单格式换转成键值形式
+             3.发送ajax请求
+*/
+$('#sub').on('click',() => {
+  //把表单格式化
+  let data = $('form').serialize();
+  // console.log(data);
+  //发送ajax请求
+  $.ajax({
+    type : 'post',
+    url : 'http://127.0.0.1:8080/eidtHeroById',
+    data : data,
+    success : function(res) {
+      if(res.code === 200) {
+        $('#success').modal();
+        $('#success .container-fluid').text('修改成功');
+      }
+    }
+  })
+})
+
+//注册点击确定按钮
+$('#btn-sure').on('click',() => {
+  //跳转页面
+  location.href = "./index.html";
+
+})
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

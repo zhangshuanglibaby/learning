@@ -1,0 +1,245 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hero - Admin</title>
+  <link rel="stylesheet" href="../../static/css/bootstrap.css">
+  <style>
+    .hero-list img {
+      width: 50px;
+      height: 50px;
+      display: block
+    }
+
+    .hero-list td {
+      height: 50px;
+      line-height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="page-header container">
+      <h1>王者荣耀 <small>英雄管理器</small></h1>
+
+      <a href="javascript:void(0);" class="btn btn-exit btn-primary" hidden style='float:right;'>退出</a>
+      <a href="login.html" class="btn btn-login btn-success" style='float:right'>登录</a>
+    </div>
+  </header>
+  <div class="container hero-list">
+    <a class="btn btn-add btn-success pull-right" hidden href="./add.html">添加英雄</a>
+    <table class="table table-hover" hidden>
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <th>性别</th>
+          <th>头像</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <!-- <tr>
+          <td>1</td>
+          <td>狗蛋</td>
+          <td>男</td>
+          <td><img src="../static/images/0.jpg"></td>
+          <td><a href="./edit.html?id=1">修改</a> 
+            <a data-id="1" href="javscript:void(0);">删除</a>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 是否确认删除 -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">提示</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            你确定要删除吗？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" id="btn-sure" class="btn btn-primary">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 成功删除窗口 -->
+  <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">提示</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            删除成功
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+<script src="../../static/js/jquery.js"></script>
+<script src="../../static/js/template-web.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
+<script>
+  $(() => {
+    /*
+  需求: 1.验证用户是否已经登录
+        2.动态生成结构
+        3.点击添加英雄 ---在添加英雄页面实现
+        4.点击删除英雄
+        5.点击修改英雄 ---在修改页面实现
+*/
+
+    /*
+      实现需求  1.验证用户是否已经登录 & 2.动态生成结构
+           步骤:  1.读取本地数据,如果为null,则跳转到登录页面
+                 2.否则发送ajax,验证登录是否近期有登录
+                 3.在用户已经登陆了的状态下,把隐藏的东西显示出来
+                 发送ajax请求获取所有的数据
+                 4.使用模板引擎,把结构代码和逻辑代码分离
+
+    */
+    let userId = localStorage.getItem('userId');
+    //检测读取的数据
+    if (!userId) {
+      //弹出窗口,并跳转
+      alert('亲,请先登录喔');
+      location.href = './login.html';
+    }
+    //发送ajax验证用户近期有无登录 &  动态生成结构
+    $.ajax({
+      url: 'http://127.0.0.1:8080/isLogin',
+      data: {
+        id: userId
+      },
+      success: function (res) {
+        // console.log(res);
+        if (res.code === 200) {
+          //在用户已经登录的时候,把隐藏的东西显示出来
+          $('.btn-login').attr('hidden', true);
+          $('.btn-exit').removeAttr('hidden');
+          $('.btn-add').removeAttr('hidden');
+          $('.table').removeAttr('hidden');
+          //发送ajax请求
+          $.ajax({
+            type: 'post',
+            url: 'http://127.0.0.1:8080/getAllHero',
+            success: function (res) {
+              // console.log(res);
+              //调用模板引擎
+              let html = template('temp', res.data);
+              //设置给父元素
+              $('#tbody').html(html);
+            }
+          })
+        } else {
+          alert('亲,请先登录喔');
+          location.href = './login.html';
+        }
+      }
+    })
+
+
+    /*
+      实现4.点击删除英雄 --利用数据的唯一性 --id
+         步骤: 1.注册点击删除事件 ---利用事件委托
+               2.获取该数据的id
+               3.在点击删除这些危险的操作,要弹出提示框,用户确认后再删除
+               4.注册点击确认删除事件
+               5.发送ajax请求
+                 
+    */
+    //这里是要用的共用数据
+    let id;
+    let _this;
+    $('#tbody').on('click','td a:last-child',function() {
+      //获取id
+      id = $(this).attr('data-id');
+      //用闭包保存这里的this
+      _this = this;
+      //弹出是否确认删除窗口
+      $('#modelId').modal();
+    })
+
+    //注册点击确认事件--然后实现删除
+    $('#btn-sure').on('click',() => {
+      //隐藏确认删除的窗口
+      $('#modelId').modal('hide');
+      //弹出成功删除窗口
+      $('#success').modal();
+      $.ajax({
+        url : 'http://127.0.0.1:8080/deleteHeroById',
+        data : { id },
+        success : function(res) {
+          // console.log(res);
+          //删除页面的数据
+          $(_this).parents('tr').remove();
+        }
+      })
+    })
+  
+
+  })
+</script>
+<!-- 使用模板引擎生成结构  把id姓名性别图片在生成结构的时候修改-->
+<script type="text/tempalate" id="temp">
+  {{ each $data val }}
+    <tr>
+        <td>{{val.id}}</td>
+        <td>{{val.name}}</td>
+        <td>{{val.gender}}</td>
+        <td><img src="../../static/images/{{val.img}}"></td>
+        <td><a href="./edit.html?id={{val.id}}">修改</a> 
+          <a data-id="{{val.id}}" href="javscript:void(0);">删除</a>
+        </td>
+     </tr>
+{{ /each }}
+
+
+</script>
+
+</html>

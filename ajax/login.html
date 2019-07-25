@@ -6,148 +6,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <style>
-    form {
-      padding-top: 100px;
-      padding-left: 100px;
-    }
-
-    form>div {
-      margin-bottom: 15px;
-    }
-
-    input {
-      height: 32px;
-      border: none;
-      width: 500px;
-      box-shadow: 0 0 0 1px #e7e7e7 inset;
-      text-indent: 8px;
-    }
-
-    .login,
-    .register {
-      display: inline-block;
-      width: 120px;
-      line-height: 40px;
-      border-radius: 6px;
-      background-color: dodgerblue;
-      color: #fff;
-      font-size: 16px;
-      text-align: center;
-      cursor: pointer;
-      margin-top: 20px;
-      text-decoration: none;
-    }
-
-    .login:hover,
-    .register:hover {
-      background-color: deepskyblue;
-    }
-
-    .login {
-      margin-right: 15px;
-      margin-left: 80px;
-    }
-
-    #toast {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 9;
-    }
-
-    #toast span {
-      padding: 8px 15px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 4px;
-      -webkit-user-select: none;
-    }
-  </style>
+  <link rel="stylesheet" href="../../static/css/bootstrap.css">
 </head>
 
 <body>
+  <!-- <form action="">
+        用户名：<input type="text" name='username' value='jack'> <br>
+        密码：<input type="password" name='userpwd' value="123"> <br>
+        <input type="button" id="sub" value='登陆'>
+    </form> -->
 
-  <form>
-    <div class="name" data-tip="用户名已存在">
-      用&ensp;户&ensp;名：<input type="text" placeholder="请输入用户名" name='name'>
+  <div class="container">
+    <form>
+      <div class="form-group" style="height: 120px;">
+
+      </div>
+      <fieldset class="form-group row">
+        <legend class="col-form-legend col-sm-1-12">请登录</legend>
+        <div class="offset-sm-2 col-sm-10">
+          <div class="form-group">
+            <label for="">用户名</label>
+            <input type="text" class="form-control" name="userName" id="userName" aria-describedby="helpId"
+              placeholder="">
+            <small id="helpId" class="form-text text-muted">请输入您的用户名</small>
+          </div>
+        </div>
+        <div class="offset-sm-2 col-sm-10">
+          <div class="form-group">
+            <label for="">密码</label>
+            <input type="password" class="form-control" id="password" name="password" aria-describedby="helpId"
+              placeholder="">
+            <small id="helpId" class="form-text text-muted">请输入您的密码</small>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+          <input type="button" id="login-btn" class="btn btn-primary" value="登录">
+          <a href="./register.html" class="btn  btn-primary">注册</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 登录成功 -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">提示</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            信息
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+          <button type="button" id="btn-sure" class="btn btn-primary">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 登录失败 -->
+  <div class="modal fade" id="errorPrompt" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">提示</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              账号或者密码有误，登录失败
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">确定</button>
+            <!-- <button type="button" class="btn btn-primary">Save</button>
+          </div> -->
+        </div>
+      </div>
     </div>
 
-    <div class="pwd">
-      密&emsp;&emsp;码：<input type="password" placeholder="请输入密码" name='pwd'>
-    </div>
-
-    <div class="login">登录</div>
-    <a class="register" href="./register.html">注册</a>
-  </form>
 </body>
-<script src="./js/jquery.js"></script>
-<script src="./js/extend.js"></script>
+<script src="../../static/js/jquery.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
 <script>
-  // jq getError 方法，在元素后方显示错误提示，用法 $('tag').getError('信息')
-
-  // jq getCorrect 方法，在元素后方显示错误提示，用法 $('tag').getCorrect('信息')
-
-  // jq checkForm 方法，检测表单是否有错误存在，有错误返回false, 否则返回true, 用法 $(表单元素).checkForm()
-
-  // jq toast 方法, 弹出小黑提示框，用法 $.fn.toast('信息')
-
-  // serialize 方法, 格式化post提交的参数，用法 serialize(表单元素)
-  /*
-    需求:实现登录,用户名和密码要匹配
-        1.检测表单有无内容,无则弹出小黑框
-        2.用户名和密码不匹配,弹出错误信息窗口
-        3.用户名和密码匹配,弹出登录成功窗口
+/*
+  需求 : 注册登录的点击事件
+        跳转到主页面,由于主页面需要根据用户的id,动态生成该用户的英雄数据
+        实现不同页面的链接,通过本地数据储存id
 */
 
-//监听登录按钮点击事件
-$('.login').on('click',() => {
-  //检测表单用户名和密码有无内容
-  if(!$('.name input').val() || !$('.pwd input').val()) {
-    //无内容,则弹出小黑提示框
-    $.fn.toast('小坏蛋,用户和密码不能为空啦');
-  }else {
-    //创建ajax实例对象
-    let xhr = new XMLHttpRequest();
-    //准备打开请求地址
-    xhr.open('post',' http://127.0.0.1:8080/doLogin');
-    //设置请求头
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-    //把表单转成 键=值&键=值格式
-    let params = serialize($('form'));
-    //把表单作为send的参数
-    xhr.send(params);
-    //监听通信状态
-    xhr.onreadystatechange = () => {
-      //检测服务器的响应是否完成 & 服务器的响应是否正常
-      if(xhr.readyState === 4 && xhr.status === 200) {
-        //获取数据
-        let data = JSON.parse(xhr.responseText);
-        // if(data.code === 200) {
-        //   //弹出正确窗口
-        //   alert(data.msg);
-        // }else {
-        //   alert(data.msg);
-        // }
-        alert(data.msg);
+/*
+  分析 ：1.判断内容非空
+        2.把表单格式化转成键值形式
+        3.发送ajax请求
+        4.在响应正常的时候,把usderId存储到本地数据
+        5.弹出窗口并跳转页面
+*/
+
+$('#login-btn').on('click',() => {
+  //检测内容非空
+  if($('#userName').val().trim().length === 0) {
+    alert('用户名不能为空喔');
+    return;
+  }
+  if($('#password').val().trim().length === 0) {
+    alert('密码不能为空喔')
+    return;
+  }
+  //表单格式化转成键值形式
+  let params = $('form').serialize();
+  // console.log(params);
+  //发送ajax请求
+  $.ajax({
+    type : 'post',
+    url : 'http://127.0.0.1:8080/doLogin',
+    data : params,
+    success : function(res) {
+      console.log(res);
+      if(res.code === 200) {
+        localStorage.setItem('userId',res.userId);
+        //弹出窗口
+        $('#modelId').modal();
+        $('#modelId .container-fluid').text('登录成功,点击确定为你跳转页面');
+      }else {
+        $('#errorPrompt').modal();
       }
     }
-  }
+  })
 })
 
-
-
-
-
-
-
-
+//点击确定按钮,跳转到主页面
+$('#btn-sure').on('click',() => {
+  location.href = './index.html';
+})
 
 
 
