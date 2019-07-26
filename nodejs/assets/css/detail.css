@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    width: 1500px;
+    margin: auto;
+}
+
+img {
+    position: fixed;
+    width: 100%;
+}
