@@ -1,0 +1,51 @@
+[{
+  "id": 1,
+  "name": "刘德华",
+  "gender": "男",
+  "img": "/assets/images/0.jpg"
+}, {
+  "id": 2,
+  "name": "郭富城",
+  "gender": "女",
+  "img": "/assets/images/1.jpg"
+}, {
+  "id": 3,
+  "name": "张学友",
+  "gender": "男",
+  "img": "/assets/images/2.jpg"
+}, {
+  "id": 4,
+  "name": "黎明",
+  "gender": "女",
+  "img": "/assets/images/3.jpg"
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "周润发",
+  "gender": "男",
+  "id": 5
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "周星驰",
+  "gender": "女",
+  "id": 6
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "张国荣",
+  "gender": "男",
+  "id": 7
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "梅艳芳",
+  "gender": "女",
+  "id": 8
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "章子怡",
+  "gender": "女",
+  "id": 9
+}, {
+  "img": "../assets/images/0.jpg",
+  "name": "范冰冰",
+  "gender": "男",
+  "id": 10
+}]
