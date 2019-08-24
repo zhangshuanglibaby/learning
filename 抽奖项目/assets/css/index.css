@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body {
+  background: url('../images/timg.jpg');
+}
+h1 {
+  text-align: center;
+}
+img {
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+}
+h4 {
+  margin-left: 150px;
+}
+.box {
+  width: 800px;
+  margin: 0 auto;
+}
+.box ul li {
+  float: left;
+  width: 120px;
+  height: 40px;
+  background-color: lightgrey;
+  margin: 5px;
+  text-align: center;
+  line-height: 40px;
+}
+.clearfix:after {
+  visibility: hidden;
+  clear: both;
+  display: block;
+  content: ".";
+  height: 0;
+  line-height: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+input {
+  width: 100px;
+  height: 30px;
+  margin: 20px 0 0 618px;
+}
