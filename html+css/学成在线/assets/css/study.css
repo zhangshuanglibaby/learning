@@ -1,0 +1,125 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+img,
+input,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+p,
+a,
+span,
+button {
+  margin: 0;
+  padding: 0;
+}
+i,
+em {
+  font-style: normal;
+}
+img {
+  border: 0;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #050505;
+}
+input,
+button {
+  border: none;
+  outline: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+.w {
+  width: 1200px;
+  margin: 0 auto;
+}
+body {
+  background-color: #f3f5f7;
+}
+/*这是头部*/
+header {
+  padding: 28px 0;
+  background-color: pink;
+}
+header .logo {
+  margin-right: 66px;
+}
+header .logo a {
+  display: block;
+  width: 200px;
+  height: 41px;
+  font-size: 0;
+  background: url('../images/logo.png');
+}
+header .nav ul li {
+  float: left;
+  margin-right: 34px;
+  height: 40px;
+  box-sizing: border-box;
+}
+header .nav ul li a {
+  font-size: 18px;
+  display: block;
+  padding: 8px;
+}
+header .nav ul li:hover {
+  border-bottom: 3px solid #00a7ff;
+}
+header .search {
+  height: 38px;
+  margin-right: 30px;
+}
+header .search input {
+  width: 360px;
+  height: 100%;
+  text-indent: 20px;
+  border: 1px solid #00a7ff;
+  border-right: none;
+  background-color: #f3f5f7;
+}
+header .user {
+  margin-top: 3px;
+  box-sizing: border-box;
+}
+header .user a {
+  display: block;
+  color: #666;
+  font-size: 14px;
+}
+header .user a img {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  margin-right: 6px;
+  border: 2px solid #f3f5f7;
+}
+header .user a:hover img {
+  border: 2px solid #00a7ff;
+}

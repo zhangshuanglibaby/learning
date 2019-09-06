@@ -1,0 +1,80 @@
+//项目样式初始化文件
+
+//清除内外边距
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+img,
+input,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+p,
+a,
+span,
+button {
+    margin: 0;
+    padding: 0
+}
+
+//让所有斜体,不倾斜
+i,em {
+    font-style: normal;
+}
+
+//图片没有边框 ,去掉默认的底部边距
+img {
+    border: 0;
+    display: block;
+}
+
+//去除ul前面的点
+ul {
+    list-style: none;
+}
+
+//取消链接下的下滑线
+a {
+    text-decoration: none;
+    color: #050505;
+}
+
+//初始化input的边框和外轮廓线
+input,button {
+    border: none;
+    outline: none;
+}
+
+//左浮动
+.fl {
+    float: left;
+}
+//右浮动
+.fr {
+    float: right;
+}
+
+//清除浮动
+.clearfix:after {
+    content : '.';
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+//版心,居中对齐
+.w {
+    width :1200px;
+    margin: 0 auto;
+}
