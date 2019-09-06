@@ -1,14 +1,21 @@
 //引入base文件
 @import './base.less';
 
+.fzColor {
+  color: #00a4ff;
+  font-weight: bold;
+}
+
 body {
   background-color: #f3f5f7;
+}
+.footer {
+  height: 500px;
 }
 
 /*这是头部*/
 header {
   padding: 28px 0;
-  background-color: pink;
   .logo {
     margin-right: 66px;
     a {
@@ -68,6 +75,123 @@ header {
           border: 2px solid #00a7ff;
         }
       }
+    }
+  }
+}
+
+/*这是banner*/
+.banner {
+  background-color: #1c036c;
+  .banner_beijing {
+    background: url('../images/banner2.png');
+    height: 420px;
+    .left_nav {
+      ul {
+        width: 190px;
+        padding: 7px 0;
+        background-color: rgba(0, 0, 0, .3);
+        li {
+          font-size: 14px;
+          a {
+            display: block;
+            color: #fff;
+            padding: 13px 20px;
+            i {
+              float: right;
+            }
+            &:hover {
+              color: #00a7ff;
+            }
+          }
+        }
+      }
+    }
+    .right_form {
+      width: 230px;
+      margin-top: 48px;
+      .form_title {
+        height: 48px;
+        background-color: #9bceea;
+        line-height: 48px;
+        text-align: center;
+        h4 {
+          color: #fff;
+          font-family: 'SimHei';
+          font-size: 18px;
+        }
+      }
+      .form_main {
+        background-color: #fff;
+        padding-bottom: 10px;
+        a {
+          display: block;
+          padding: 18px 0;
+          margin: 0 18px;
+          border-bottom: 1px solid #e5e5e5;
+          &:nth-child(2) {
+            padding: 12px 0;
+          }
+          &:hover {
+            p,i {
+              color: #00a4ff;
+            }
+          }
+          p {
+            font-size: 16px;
+            color: #4e4e4e;
+            span {
+              font-size: 14px;
+            }
+          }
+          i {
+            font-size: 12px;
+            color: #a5a5a5;
+          }
+        }
+        button {
+          width: 198px;
+          height: 38px;
+          font-weight: bold;
+          background-color: #fff;
+          border: 1px solid #00a4ff;
+          font-size: 16px;
+          color: #00a4ff;
+          text-align: center;
+          margin-left: 14px;
+          cursor: pointer;
+          &:hover {
+            background-color: #00a4ff;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*这是精品推荐栏*/
+.recomm_bar {
+  background-color: #fff;
+  padding: 20px 0;
+  margin-top: 10px;
+  box-shadow: 0px 2px 5px #ddd;
+  .recomm_bar_nav {
+    ul {
+      li {
+        float: left;
+        border-right: 1px solid #bfbfbf;
+        padding: 0 34px;
+        &:nth-child(7) {
+        border-right : none;
+        }
+      }
+    }
+  }
+  .recomm_bar_alter {
+    font-size: 14px;
+    padding-right: 24px;
+    a {
+      color: #00a4ff;
     }
   }
 }

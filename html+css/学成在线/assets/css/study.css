@@ -60,13 +60,19 @@ button {
   width: 1200px;
   margin: 0 auto;
 }
+.fzColor {
+  color: #00a4ff;
+  font-weight: bold;
+}
 body {
   background-color: #f3f5f7;
+}
+.footer {
+  height: 500px;
 }
 /*这是头部*/
 header {
   padding: 28px 0;
-  background-color: pink;
 }
 header .logo {
   margin-right: 66px;
@@ -122,4 +128,112 @@ header .user a img {
 }
 header .user a:hover img {
   border: 2px solid #00a7ff;
+}
+/*这是banner*/
+.banner {
+  background-color: #1c036c;
+}
+.banner .banner_beijing {
+  background: url('../images/banner2.png');
+  height: 420px;
+}
+.banner .banner_beijing .left_nav ul {
+  width: 190px;
+  padding: 7px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.banner .banner_beijing .left_nav ul li {
+  font-size: 14px;
+}
+.banner .banner_beijing .left_nav ul li a {
+  display: block;
+  color: #fff;
+  padding: 13px 20px;
+}
+.banner .banner_beijing .left_nav ul li a i {
+  float: right;
+}
+.banner .banner_beijing .left_nav ul li a:hover {
+  color: #00a7ff;
+}
+.banner .banner_beijing .right_form {
+  width: 230px;
+  margin-top: 48px;
+}
+.banner .banner_beijing .right_form .form_title {
+  height: 48px;
+  background-color: #9bceea;
+  line-height: 48px;
+  text-align: center;
+}
+.banner .banner_beijing .right_form .form_title h4 {
+  color: #fff;
+  font-family: 'SimHei';
+  font-size: 18px;
+}
+.banner .banner_beijing .right_form .form_main {
+  background-color: #fff;
+  padding-bottom: 10px;
+}
+.banner .banner_beijing .right_form .form_main a {
+  display: block;
+  padding: 18px 0;
+  margin: 0 18px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.banner .banner_beijing .right_form .form_main a:nth-child(2) {
+  padding: 12px 0;
+}
+.banner .banner_beijing .right_form .form_main a:hover p,
+.banner .banner_beijing .right_form .form_main a:hover i {
+  color: #00a4ff;
+}
+.banner .banner_beijing .right_form .form_main a p {
+  font-size: 16px;
+  color: #4e4e4e;
+}
+.banner .banner_beijing .right_form .form_main a p span {
+  font-size: 14px;
+}
+.banner .banner_beijing .right_form .form_main a i {
+  font-size: 12px;
+  color: #a5a5a5;
+}
+.banner .banner_beijing .right_form .form_main button {
+  width: 198px;
+  height: 38px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #00a4ff;
+  font-size: 16px;
+  color: #00a4ff;
+  text-align: center;
+  margin-left: 14px;
+  cursor: pointer;
+}
+.banner .banner_beijing .right_form .form_main button:hover {
+  background-color: #00a4ff;
+  color: #fff;
+}
+/*这是精品推荐栏*/
+.recomm_bar {
+  background-color: #fff;
+  padding: 20px 0;
+  margin-top: 10px;
+  box-shadow: 0px 2px 5px #ddd;
+}
+.recomm_bar .recomm_bar_nav ul li {
+  float: left;
+  border-right: 1px solid #bfbfbf;
+  padding: 0 34px;
+}
+.recomm_bar .recomm_bar_nav ul li:nth-child(7) {
+  border-right: none;
+}
+.recomm_bar .recomm_bar_alter {
+  font-size: 14px;
+  padding-right: 24px;
+}
+.recomm_bar .recomm_bar_alter a {
+  color: #00a4ff;
 }
