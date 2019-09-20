@@ -1,0 +1,51 @@
+/**index.wxss**/
+.container {
+  padding: 0 15rpx;
+}
+.header {
+  display: flex;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  box-shadow: 0 0 8rpx #e0e0e0;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+}
+.header .plug {
+  width: 45rpx;
+  margin-right: 15rpx;
+}
+.main-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border : 1rpx  solid #e0e0e0;
+  border-bottom: 0rpx;
+  border-radius: 8rpx;
+  box-shadow: 0 0 8rpx #e0e0e0;
+  padding: 20rpx;
+}
+.main .delete {
+  position: relative;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #b2b2b2;
+  border-radius: 50%;
+}
+.main .delete .line {
+  position: absolute;
+  left: 7rpx;
+  top: 16rpx;
+  width: 26rpx;
+  height: 8rpx;
+  background-color: #fff;
+}
+.main .delete:hover {
+  background-color: rgb(252, 87, 87);
+}
+
+
+
+
+
+

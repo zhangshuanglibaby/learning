@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header">
+    <image class="plug" src="../../assets/icon/plus.png" mode="widthFix" bindtap="handleTap"/>
+    <input placeholder="something here" class="new-todo" bindinput="handleInput"/>
+  </view>
+
+  <view class="main">
+    <view class="main-list" wx:for="{{cityList}}" wx:key="{{id}}">
+      <raido-group class="main-group">
+        <radio>
+          <text>{{item.city}}</text>
+        </radio>
+      </raido-group>
+      <text class="delete" bindtap="handleDelete" data-index="{{index}}"><text class="line"></text></text>
+    </view>
+  </view>
+
+
+
+
+</view>
