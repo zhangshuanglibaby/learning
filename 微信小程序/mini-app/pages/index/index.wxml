@@ -2,3 +2,16 @@
 
 <!-- 引入搜索组件 -->
 <SearchInput></SearchInput>
+
+
+<!-- 
+    原图宽 /  原图高  =  实际图宽 / 实际图高
+    750 / 340  =  750rpx / height
+    height = 750rpx * 340 / 750
+ -->
+<!-- 轮播图 -->
+<swiper  indicator-dots autoplay circular>
+    <swiper-item wx:for="{{swiperList}}" wx:key="{{goods_id}}">
+        <image src="{{item.image_src}}" mode="widthFix"></image>
+    </swiper-item>
+</swiper>
