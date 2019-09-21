@@ -16,6 +16,7 @@ image {
 page {
     color: #666;
     font-size: 28rpx;
+    background-color: #eee;
     /* 声明变量 */
     --themeColor : #ff0027;
 }

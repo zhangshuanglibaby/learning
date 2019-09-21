@@ -5,8 +5,40 @@ swiper {
 .nav {
   display: flex;
   justify-content: center;
+  margin-bottom: 10rpx;
 }
 .nav .nav-item {
   flex: 1;
   padding: 30rpx;
+}
+.floor {
+  padding: 0 15rpx;
+}
+.floor .floor-group {
+  margin-bottom: 20rpx;
+}
+.floor .floor-group .floor-content {
+  background-color: #fff;
+  overflow: hidden;
+  padding: 20rpx 0;
+  padding-right: 20rpx;
+  border-radius: 20rpx;
+}
+.floor .floor-group .floor-content navigator {
+  float: left;
+  width: 33.3333%;
+  padding-left: 10rpx;
+}
+.floor .floor-group .floor-content navigator:nth-child(1) {
+  height: 398.70689655rpx;
+  padding-left: 20rpx;
+}
+.floor .floor-group .floor-content navigator:nth-last-child(-n+4) {
+  height: 199.89655172rpx;
+}
+.floor .floor-group .floor-content navigator:nth-last-child(-n+2) {
+  padding-top: 10rpx;
+}
+.floor .floor-group .floor-content navigator image {
+  height: 100%;
 }

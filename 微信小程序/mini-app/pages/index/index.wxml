@@ -10,16 +10,43 @@
     height = 750rpx * 340 / 750
  -->
 <!-- 轮播图 -->
-<swiper  indicator-dots autoplay circular>
-    <swiper-item wx:for="{{swiperList}}" wx:key="{{goods_id}}">
-        <image src="{{item.image_src}}" mode="widthFix"></image>
-    </swiper-item>
+<swiper indicator-dots autoplay circular>
+  <swiper-item wx:for="{{swiperList}}" wx:key="{{goods_id}}">
+    <image src="{{item.image_src}}" mode="widthFix"></image>
+  </swiper-item>
 </swiper>
 
 
 <!-- 导航分类 -->
 <view class="nav">
-    <navigator class="nav-item" wx:for="{{CateList}}" wx:key="{{name}}">
-        <image mode="widthFix" src="{{item.image_src}}"></image>
-    </navigator>
+  <navigator class="nav-item" wx:for="{{cateList}}" wx:key="{{name}}">
+    <image mode="widthFix" src="{{item.image_src}}"></image>
+  </navigator>
 </view>
+
+<!-- 楼层 -->
+<view class="floor">
+  <view class="floor-group" wx:for="{{floorList}}" wx:key="{{index}}">
+    <view class="floor-title">
+      <image mode="widthFix" src="{{item.floor_title.image_src}}"></image>
+    </view>
+    <view class="floor-content">
+      <navigator 
+      wx:for="{{item.product_list}}"
+      wx:key="{{name}}"
+      wx:for-item="item2"
+      wx:for-index="index2">
+      <!-- 需要注意除了第一张图时widthFix  其余都是默认的scaleToFill -->
+        <image  src="{{item2.image_src}}"></image>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 232 386   233  188 
+
+ 232 / 386 = 250rpx / ?
+
+? = 250rpx * 386 / 232 /2
+
+-->
