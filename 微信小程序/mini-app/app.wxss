@@ -1,0 +1,21 @@
+/* 引入字体图标 */
+@import './styles/iconfont.wxss';
+
+/* 初始化 */
+page,view,text,image,navigator,swiper,swiper-item,button,input {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 图片宽百分比 */
+image {
+    width: 100%;
+}
+
+page {
+    color: #666;
+    font-size: 28rpx;
+    /* 声明变量 */
+    --themeColor : #000055;
+}
