@@ -17,5 +17,5 @@ page {
     color: #666;
     font-size: 28rpx;
     /* 声明变量 */
-    --themeColor : #000055;
+    --themeColor : #ff0027;
 }
