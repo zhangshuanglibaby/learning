@@ -15,3 +15,11 @@
         <image src="{{item.image_src}}" mode="widthFix"></image>
     </swiper-item>
 </swiper>
+
+
+<!-- 导航分类 -->
+<view class="nav">
+    <navigator class="nav-item" wx:for="{{CateList}}" wx:key="{{name}}">
+        <image mode="widthFix" src="{{item.image_src}}"></image>
+    </navigator>
+</view>
