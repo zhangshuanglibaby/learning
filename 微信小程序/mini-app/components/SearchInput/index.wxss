@@ -1,0 +1,13 @@
+/* components/SearchInput/index.wxss */ 
+
+.search_input {
+    background-color: #ff9e1f;
+    padding: 16rpx;
+}
+
+.search_input input {
+    background-color: #fff;
+    height: 54rpx;
+    border-radius: 8rpx;
+    text-align: center;
+}

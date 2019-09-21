@@ -1,2 +1,4 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+
+<!-- 引入搜索组件 -->
+<SearchInput></SearchInput>
