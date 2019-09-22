@@ -1,0 +1,15 @@
+<!--components/myTabs/index.wxml-->
+
+<view class="tab">
+    <view class="tab-main">
+        <view class="tab-item {{index === currentIndex ? 'active' : ''}}" 
+        wx:for="{{tabList}}"
+        wx:key="{{id}}"
+        bindtap="handleTap"
+        data-index="{{index}}">
+            <text class="tab-item-text"> {{item.text}}</text>
+        </view>
+    </view>
+    <!-- 自定义内容 -->
+    <slot></slot>
+</view>

@@ -1,0 +1,29 @@
+/* components/myTabs/index.wxss */
+
+.tab {
+  border-top: 20rpx solid rgb(241, 47, 47);
+}
+.tab-main {
+  display: flex;
+}
+.tab-item {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  line-height: 75rpx;
+  color: #666;
+}
+
+.active {
+  color: red;
+}
+
+.active ::after {
+  content: "";
+  display: block;
+  position: absolute;
+  margin-left: 45%;
+  width: 20rpx;
+  height: 2rpx;
+  background-color: red;
+}

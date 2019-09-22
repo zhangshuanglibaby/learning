@@ -1,0 +1,10 @@
+<!--index.wxml-->
+
+<view class="container">
+    <!-- 引入tab组件 -->
+    <myTabs bindsendIndex="handleSendIndex" currentIndex="{{index}}">
+            <view wx:if="{{index === 0}}">习近平：在庆祝政协会议成立70周年大会上的讲话</view>
+            <view wx:elif="{{index === 1}}">特朗普登机时一张20美金任裤兜随风飘扬</view>
+            <view wx:else>95后小伙带客户坐地铁遭老板怒斥"不带脑子"</view>
+    </myTabs>
+</view>
