@@ -2,7 +2,7 @@
 <!-- 搜索组件 -->
 
 <view class="container">
-  <navigator class="search_input">
+  <navigator class="search_input" url="/pages/search/index">
     <input placeholder="搜索"/>
   </navigator>
 </view>

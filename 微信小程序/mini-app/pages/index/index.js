@@ -1,9 +1,9 @@
-// pages/index/index.js
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+//引入request
+import {request} from '../../request/index.js'
+
+Page({
+  //页面的初始数据
   data: {
     swiperList : [],    //轮播图数据
     cateList : [],   //导航数据
@@ -19,40 +19,32 @@ Page({
 
   // 获取首页轮播图
   getSwiperdata() {
-    wx.reqTask = wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/swiperdata',
-      success: (res) => {
-        // console.log(res)
-        this.setData({
-          swiperList : res.data.message
-        })
-      }
+    request({url : '/swiperdata'})
+    .then(res => {
+      // console.log(res)
+      this.setData({
+        swiperList : res.data.message
+      })
     }) 
   },
 
   //获取首页导航菜单
   getCatitems() {
-    wx.request({
-      url : 'https://api.zbztb.cn/api/public/v1/home/catitems',
-      success : (res) => {
-        // console.log(res)
-        this.setData({
-          cateList : res.data.message
-        })
-      }
+    request({url : '/catitems'})
+    .then(res => {
+      this.setData({
+        cateList : res.data.message
+      })
     })
   },
 
   //获取楼层数据
   getFloordata() {
-    wx.request({
-      url : 'https://api.zbztb.cn/api/public/v1/home/floordata',
-      success : res => {
-        // console.log(res)
-        this.setData({
-          floorList : res.data.message
-        })
-      }
+    request({url : '/floordata'})
+    .then(res => {
+      this.setData({
+        floorList : res.data.message
+      })
     })
   }
 })

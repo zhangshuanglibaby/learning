@@ -4,7 +4,7 @@
 <SearchInput></SearchInput>
 
 
-<!-- 
+<!--  
     原图宽 /  原图高  =  实际图宽 / 实际图高
     750 / 340  =  750rpx / height
     height = 750rpx * 340 / 750
