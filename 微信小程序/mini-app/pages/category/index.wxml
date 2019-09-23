@@ -1,2 +1,26 @@
-<!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<!-- 引入搜索组件 -->
+<SearchInput></SearchInput>
+
+<view class="cate_container">
+  <!-- 左侧菜单列表 -->
+  <scroll-view scroll-y class="cate_menuList">
+    <view class="menuList_item {{currentIndex === index ? 'active' : ''}}" wx:for="{{menuList}}" wx:key="*this"
+      bindtap="handleTap" data-index="{{index}}">
+      {{item}}
+
+    </view>
+  </scroll-view>
+
+  <!-- 右侧商品 -->
+  <scroll-view scroll-y scroll-top="{{scrollTop}}" class="cate_goodList">
+    <view class="goods_group" wx:for="{{goodsList}}" wx:key="{{cat_id}}">
+      <view class="goods_title">{{item.cat_name}}</view>
+      <view class="goods_main">
+        <navigator wx:for="{{item.children}}" wx:key="cat_id" url="../goods_list/index?cid={{item.cat_id}}">
+          <image mode="widthFix" src="{{item.cat_icon}}"></image>
+          <view class="goods_text">{{item.cat_name}}</view>
+        </navigator>
+      </view>
+    </view>
+  </scroll-view>
+</view>

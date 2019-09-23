@@ -31,7 +31,7 @@ Page({
 
   // 获取首页轮播图
   getSwiperdata() {
-    request({url : '/swiperdata'})
+    request({url : '/home/swiperdata'})
     .then(res => {
       // console.log(res)
       this.setData({
@@ -42,7 +42,7 @@ Page({
 
   //获取首页导航菜单
   getCatitems() {
-    request({url : '/catitems'})
+    request({url : '/home/catitems'})
     .then(res => {
       this.setData({
         cateList : res.data.message
@@ -52,7 +52,7 @@ Page({
 
   //获取楼层数据
   getFloordata() {
-    request({url : '/floordata'})
+    request({url : '/home/floordata'})
     .then(res => {
       this.setData({
         floorList : res.data.message
