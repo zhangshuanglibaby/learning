@@ -1,4 +1,10 @@
 
+/**
+ * 统一在request中加入loading的方法
+ * 需要在同时发出去去的请求都回来了
+ * 再去结束loading  
+ */
+
 //引入request
 import {request} from '../../request/index.js'
 
@@ -15,6 +21,12 @@ Page({
     this.getSwiperdata()
     this.getCatitems()
     this.getFloordata()
+    
+    // //显示加载
+    // wx.showLoading({
+    //   title : '加载中',
+    //   mask : true
+    // })
   },
 
   // 获取首页轮播图
