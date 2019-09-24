@@ -1,2 +1,30 @@
-<!--pages/goods_detail/index.wxml-->
-<text>pages/goods_detail/index.wxml</text>
+<view class="detail_container">
+  <!-- 轮播图 -->
+  <swiper class="swiper"
+  indicator-dots
+  autoplay
+  circular>
+    <swiper-item 
+    wx:for="{{detailList.pics}}" 
+    wx:key="pics_id" 
+    class="swiper-item"
+    bindtap="handlePreviewImage"
+    data-current="{{index}}">
+      <image mode="aspectFit" src="{{item.pics_mid_url}}"></image>
+    </swiper-item>
+  </swiper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>

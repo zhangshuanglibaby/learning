@@ -1,1 +1,6 @@
-/* pages/goods_detail/index.wxss */
+.detail_container {
+  background-color: #fff;
+}
+.detail_container .swiper {
+  height: 492rpx;
+}

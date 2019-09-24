@@ -6,7 +6,7 @@
 
   <!-- 综合 -->
   <view class="goods_all" wx:if="{{currentIndex === 0}}">
-    <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="goods_id">
+    <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="goods_id" url="/pages/goods_detail/index?goods_id={{item.goods_id}}">
       <view class="img_wrap">
         <image mode="widthFix" src="{{item.goods_small_logo || 'http://fs.zhenjiang365.cn/bbsimg/fcmb/image/nopic590.jpg'}}"></image>
       </view>

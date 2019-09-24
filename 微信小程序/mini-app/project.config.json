@@ -51,16 +51,9 @@
 			"current": 2,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/category/index",
+					"id": 0,
+					"name": "分类页",
 					"pathName": "pages/category/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "商品列表页",
-					"pathName": "pages/goods_list/index",
 					"query": "",
 					"scene": null
 				},
@@ -69,6 +62,13 @@
 					"name": "商品列表页",
 					"pathName": "pages/goods_list/index",
 					"query": "cid=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品详情页",
+					"pathName": "pages/goods_detail/index",
+					"query": "goods_id=43986",
 					"scene": null
 				}
 			]
