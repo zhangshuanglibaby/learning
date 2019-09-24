@@ -9,7 +9,7 @@
     wx:key="pics_id" 
     class="swiper-item"
     bindtap="handlePreviewImage"
-    data-current="{{index}}">
+    data-current="{{item.pics_mid_url}}">
       <image mode="aspectFit" src="{{item.pics_mid_url}}"></image>
     </swiper-item>
   </swiper>
@@ -35,6 +35,25 @@
 </view>
 
 
+<!-- 底部工具栏 -->
+<view class="btm_tool">
+  <view class="tool_item">
+    <button open-type="contact"></button>
+    <view class="iconfont icon-kefu"></view>
+    <text>联系客服</text>
+  </view>
+  <view class="tool_item tool_contact">
+      <button open-type="share"></button>
+    <view class="iconfont icon-yixianshi-"></view>
+    <text>分享</text>
+  </view>
+  <view class="tool_item">
+    <view class="iconfont icon-gouwuche"></view>
+    <text>购物车</text>
+  </view>
+  <view class="tool_item tool_add" bindtap="handleAppCart">加入购物车</view>
+  <view class="tool_item tool_buy">立即购买</view>
+</view>
 
 
 
