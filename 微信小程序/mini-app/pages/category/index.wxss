@@ -1,5 +1,5 @@
 .cate_container {
-  display: flex;
+  display: flex; 
   height: calc(100vh - 90rpx);
   overflow: hidden;
   padding-top: 20rpx;

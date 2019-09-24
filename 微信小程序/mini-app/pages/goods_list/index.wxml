@@ -1,2 +1,15 @@
-<!--pages/goods_list/index.wxml-->
-<text>pages/goods_list/index.wxml</text>
+
+
+<!-- 引入搜索组件 -->
+<SearchInput></SearchInput>
+
+<!-- 引入tab组件 -->
+<YGtabs titleList="{{titleList}}" 
+ currentIndex="{{currentIndex}}"
+  bindsendIndex="handSendIndex">
+
+  <view class="goods_all" wx:if="{{currentIndex === 0}}">1</view>
+  <view class="goods_sale" wx:elif="{{currentIndex === 1}}">2</view>
+  <view class="goods_price" wx:else>3</view>
+</YGtabs>
+
