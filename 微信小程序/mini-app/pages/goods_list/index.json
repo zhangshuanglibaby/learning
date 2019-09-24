@@ -3,5 +3,7 @@
     "SearchInput" : "../../components/SearchInput/index",
     "YGtabs" : "../../components/YGtabs/index"
   },
-  "navigationBarTitleText" : "商品列表"
+  "navigationBarTitleText" : "商品列表",
+  "enablePullDownRefresh" : true,
+  "backgroundTextStyle" : "dark"
 }

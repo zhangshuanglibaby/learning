@@ -1,15 +1,26 @@
-
-
 <!-- 引入搜索组件 -->
 <SearchInput></SearchInput>
 
 <!-- 引入tab组件 -->
-<YGtabs titleList="{{titleList}}" 
- currentIndex="{{currentIndex}}"
-  bindsendIndex="handSendIndex">
+<YGtabs titleList="{{titleList}}" currentIndex="{{currentIndex}}" bindsendIndex="handSendIndex">
 
-  <view class="goods_all" wx:if="{{currentIndex === 0}}">1</view>
+  <!-- 综合 -->
+  <view class="goods_all" wx:if="{{currentIndex === 0}}">
+    <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="goods_id">
+      <view class="img_wrap">
+        <image mode="widthFix" src="{{item.goods_small_logo || 'http://fs.zhenjiang365.cn/bbsimg/fcmb/image/nopic590.jpg'}}"></image>
+      </view>
+      <view class="good_info">
+        <view class="good_name">{{item.goods_name}}</view>
+        <view class="good_price">￥{{item.goods_price}}</view>
+      </view>
+    </navigator>
+    <view class="end" wx:if="{{isShow}}">没有商品了 .....</view>
+  </view>
+
+  <!-- 销量 -->
   <view class="goods_sale" wx:elif="{{currentIndex === 1}}">2</view>
+
+  <!-- 价钱 -->
   <view class="goods_price" wx:else>3</view>
 </YGtabs>
-
