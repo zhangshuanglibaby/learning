@@ -34,7 +34,7 @@ Page({
   const res = await request({url : '/home/swiperdata'})
       // console.log(res)
       this.setData({
-        swiperList : res.data.message
+        swiperList : res
   })
 },
 
@@ -42,7 +42,7 @@ Page({
  async getCatitems() {
   const res = await request({url : '/home/catitems'})
       this.setData({
-        cateList : res.data.message
+        cateList : res
       })
   },
 
@@ -50,7 +50,7 @@ Page({
  async getFloordata() {
   const res = await request({url : '/home/floordata'})
       this.setData({
-        floorList : res.data.message
+        floorList : res
     })
   }
 })

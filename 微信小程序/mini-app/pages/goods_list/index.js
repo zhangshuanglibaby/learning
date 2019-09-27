@@ -62,10 +62,10 @@ Page({
   const res = await request({url : '/goods/search',data : this.goodsObj})
       // console.log(res)
       //需要实现新旧数据结合
-      const newGoodsList = res.data.message.goods
+      const newGoodsList = res.goods
       const oldGoodsList = this.data.goodsList
 
-      const {total} = res.data.message
+      const {total} = res
       this.totalPages = Math.ceil(total / this.goodsObj.pagesize)
 
       this.setData({

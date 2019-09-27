@@ -62,7 +62,7 @@ Page({
  async getCate() {
    const res = await request({url : '/categories'})
       // console.log(res)
-      this.cateData = res.data.message
+      this.cateData = res
       //把数据缓存到本地中
     wx.setStorageSync('cates', {data : this.cateData,time : Date.now()});
       const menuList = this.cateData.map(v => v.cat_name)

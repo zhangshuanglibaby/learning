@@ -30,9 +30,7 @@
  * 
  */
 import regeneratorRuntime from '../../lib/runtime/runtime'
-import {
-  request
-} from '../../request/index'
+import { request} from '../../request/index'
 
 Page({
   data: {
@@ -48,7 +46,7 @@ Page({
     const res = await request({ url: '/goods/detail',data: {goods_id}})
     //  console.log(res)
     this.setData({
-      detailList: res.data.message
+      detailList: res
     })
   },
 
