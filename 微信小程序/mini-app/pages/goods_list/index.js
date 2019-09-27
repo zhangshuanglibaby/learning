@@ -13,7 +13,7 @@
 
 
 
-
+import regeneratorRuntime from '../../lib/runtime/runtime'
 import {request} from '../../request/index.js'
 
 Page({
@@ -58,10 +58,9 @@ Page({
   },
 
   //获取商品列表数据
-  getGoodsList() {
-    request({url : '/goods/search',data : this.goodsObj})
-    .then(res => {
-      console.log(res)
+ async getGoodsList() {
+  const res = await request({url : '/goods/search',data : this.goodsObj})
+      // console.log(res)
       //需要实现新旧数据结合
       const newGoodsList = res.data.message.goods
       const oldGoodsList = this.data.goodsList
@@ -72,10 +71,8 @@ Page({
       this.setData({
         goodsList : [...oldGoodsList,...newGoodsList]
       })
-
       //数据回来了,关闭下拉动作
       wx.stopPullDownRefresh()
-    })
   },
 
   //页面上拉触发的事件

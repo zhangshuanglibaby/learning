@@ -29,12 +29,14 @@
  *        4  使用wx.showToast提示加入购物车成功
  * 
  */
-
-import {request} from '../../request/index'
+import regeneratorRuntime from '../../lib/runtime/runtime'
+import {
+  request
+} from '../../request/index'
 
 Page({
-  data : {
-    detailList : {} //商品详情数据
+  data: {
+    detailList: {} //商品详情数据
   },
 
   onLoad(options) {
@@ -42,25 +44,23 @@ Page({
   },
 
   //获取商品详情数据
-  getDetailList(goods_id) {
-    request({url : '/goods/detail',data : {goods_id}})
-    .then(res => {
-      console.log(res)
-      this.setData({
-        detailList : res.data.message
-      })
+  async getDetailList(goods_id) {
+    const res = await request({ url: '/goods/detail',data: {goods_id}})
+    //  console.log(res)
+    this.setData({
+      detailList: res.data.message
     })
   },
 
   //点击轮播触发预览大图
   handlePreviewImage(e) {
     // console.log(e)
-    const {current} = e.currentTarget.dataset
-    const {detailList} = this.data
+    const { current} = e.currentTarget.dataset
+    const { detailList} = this.data
     const urls = detailList.pics.map(v => v.pics_mid_url)
     wx.previewImage({
-      current ,
-      urls 
+      current,
+      urls
     })
   },
 
@@ -69,30 +69,30 @@ Page({
     //获取本地的数据
     let cartList = wx.getStorageSync('carts') || [];
 
-    const {detailList} = this.data
+    const { detailList } = this.data
 
     const index = cartList.findIndex(v => v.goods_id === detailList.goods_id)
 
-    if(index === -1) {
+    if (index === -1) {
       //找不到,新增
       cartList.push({
-        goods_id  : detailList.goods_id,
-        goods_name : detailList.goods_name,
-        goods_price : detailList.goods_price,
-        goods_small_logo : detailList.goods_small_logo,
-        num : 1
+        goods_id: detailList.goods_id,
+        goods_name: detailList.goods_name,
+        goods_price: detailList.goods_price,
+        goods_small_logo: detailList.goods_small_logo,
+        num: 1
       })
-    }else {
+    } else {
       cartList[index].num++
     }
 
     //把数据存进本地
-    wx.setStorageSync('carts',cartList)
+    wx.setStorageSync('carts', cartList)
 
     wx.showToast({
-      title : '加入购物成功',
-      icon : 'success',
-      mask : true
+      title: '加入购物成功',
+      icon: 'success',
+      mask: true
     })
   }
 })

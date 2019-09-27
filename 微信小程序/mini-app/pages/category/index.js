@@ -1,6 +1,3 @@
-//引入请求方法
-import {request} from '../../request/index.js'
-
 /**
  * 给大数据加一个缓存效果
  *  1 在第一次发送请求成功的时候,把数据缓存起来
@@ -17,9 +14,11 @@ import {request} from '../../request/index.js'
  *   2  没有旧的数据  再次发送请求获取新的数据
  */
 
+import regeneratorRuntime from '../../lib/runtime/runtime'
+ //引入请求方法
+import {request} from '../../request/index.js'
+
 Page({
-
-
   //页面初始化
   data: {
     menuList : [],  //左侧的菜单栏数据
@@ -60,15 +59,12 @@ Page({
   },
 
   //获取商品分类数据
-  getCate() {
-    request({url : '/categories'})
-    .then(res => {
+ async getCate() {
+   const res = await request({url : '/categories'})
       // console.log(res)
       this.cateData = res.data.message
       //把数据缓存到本地中
     wx.setStorageSync('cates', {data : this.cateData,time : Date.now()});
-       
-
       const menuList = this.cateData.map(v => v.cat_name)
       const goodsList = this.cateData[0].children
       // console.log(menuList)
@@ -76,7 +72,6 @@ Page({
         menuList,
         goodsList
       })
-    })
   },
 
   //点击左侧菜单栏触发

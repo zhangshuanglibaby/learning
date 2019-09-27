@@ -4,7 +4,7 @@
  * 需要在同时发出去去的请求都回来了
  * 再去结束loading  
  */
-
+import regeneratorRuntime from '../../lib/runtime/runtime'
 //引入request
 import {request} from '../../request/index.js'
 
@@ -30,33 +30,27 @@ Page({
   },
 
   // 获取首页轮播图
-  getSwiperdata() {
-    request({url : '/home/swiperdata'})
-    .then(res => {
+ async getSwiperdata() {
+  const res = await request({url : '/home/swiperdata'})
       // console.log(res)
       this.setData({
         swiperList : res.data.message
-      })
-    }) 
-  },
+  })
+},
 
   //获取首页导航菜单
-  getCatitems() {
-    request({url : '/home/catitems'})
-    .then(res => {
+ async getCatitems() {
+  const res = await request({url : '/home/catitems'})
       this.setData({
         cateList : res.data.message
       })
-    })
   },
 
   //获取楼层数据
-  getFloordata() {
-    request({url : '/home/floordata'})
-    .then(res => {
+ async getFloordata() {
+  const res = await request({url : '/home/floordata'})
       this.setData({
         floorList : res.data.message
-      })
     })
   }
 })
