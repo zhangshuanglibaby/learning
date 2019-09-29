@@ -47,10 +47,10 @@
     <view class="iconfont icon-yixianshi-"></view>
     <text>分享</text>
   </view>
-  <view class="tool_item">
+  <navigator url="/pages/cart/index" class="tool_item">
     <view class="iconfont icon-gouwuche"></view>
     <text>购物车</text>
-  </view>
+  </navigator>
   <view class="tool_item tool_add" bindtap="handleAppCart">加入购物车</view>
   <view class="tool_item tool_buy">立即购买</view>
 </view>
