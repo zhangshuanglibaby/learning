@@ -1,1 +1,14 @@
-<button bindtap="handleGetAddress">获取收获地址</button>
+<!-- 
+  通过if检测adress控制按钮和收获信息的显示
+  adress可能是对象,可能是空字符串(代表没有false),空字符串则显示按钮
+ -->
+
+<button wx:if="{{!adress}}" bindtap="handleGetAddress" type="primary" plain class="btn-adress">获取收获地址</button>
+
+<view class="adress" wx:else>
+  <view class="adress_info">
+    <view class="adress_info_name">{{adress.userName}}</view>
+    <view>{{adress.detailAdress}}</view>
+  </view>
+  <view class="tell">{{adress.telNumber}}</view>
+</view>
