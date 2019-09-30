@@ -19,7 +19,25 @@
  *       把按钮隐藏,显示信息
  *     2 假设没有
  *       显示按钮
- * */
+ * 
+ * 3 在onShow触发
+ *   1 获取缓存中的购物车数据  动态渲染到页面上
+ *     1 回到了商品详情页面 新增一个选中 属性
+ * 
+ * 4 计算数据 (由于计算需要多次调用,需要封装)
+ *   1 全选
+ *   2 总价格
+ *   3 结算数量
+ * 
+ * 5 商品的单选功能
+ *   1 给复选框绑定 bindchange
+ *   2 获取当前选中的状态
+ *     1 获取购物车carts数中的元素的checked属性
+ *     2 直接取反即可
+ *  3 重新赋值
+ *  4 重新存储
+ *  5 重新计算
+ */
 
 import regeneratorRuntime from '../../lib/runtime/runtime'
 import { getSetting,openSetting,chooseAddress } from '../../request/index'
@@ -27,7 +45,11 @@ import { getSetting,openSetting,chooseAddress } from '../../request/index'
 Page({
 
   data : {
-    adress : {}  //存储地址数据
+    adress : {},  //存储地址数据
+    carts : [],  //购物车数据
+    allChecked : false,  //全选状态
+    totalPrice : 0,  //总价格
+    totalNums : 0  //结算数量
   },
 
   //监听页面显示
@@ -35,10 +57,15 @@ Page({
     //获取缓存中的收获信息
     //此时的adress可能是有对象,可能是空字符串 ,空字符串的布尔是false
     const adress = wx.getStorageSync('adress')
+
+    //获取购物车数据
+    const carts = wx.getStorageSync('carts');
+      
     //赋值给data
-    this.setData({
-      adress
-    })
+    this.setData({adress,carts})
+
+    //调用计算方法
+    this.coundData(carts)
   },
 
   //点击获取地址按钮触发
@@ -73,5 +100,43 @@ Page({
      this.setData({
        adress : res2
      })
+  },
+
+  //计算数量
+  coundData(carts) {
+    //只要checked有一个false ,allChecked则为false
+    let allChecked = true 
+    //总价格是计算checked为true的商品 = 商品价钱 * 商品数量
+    let totalPrice = 0
+    //结算数量是结算checke为true的商品
+    let totalNums = 0
+
+    carts.forEach(v => {
+      if(v.checked) {
+        totalPrice += v.goods_price * v.num
+        totalNums += v.num
+      }else {
+        allChecked = false
+      }
+    })
+
+    //重新赋值
+    this.setData({allChecked,totalPrice,totalNums})
+  },
+
+  //点击复选框触发
+  handleItemChange(e) {
+    //获取当前索引
+    const {index} = e.target.dataset
+    //结构当前的购物车数据
+    let {carts} = this.data
+    //当前的checked属性取反
+    carts[index].checked = !carts[index].checked
+    //重新赋值
+    this.setData({carts})
+    //重新存储
+    wx.setStorageSync('carts', carts);
+    //重新计算
+    this.coundData(carts)
   }
 })

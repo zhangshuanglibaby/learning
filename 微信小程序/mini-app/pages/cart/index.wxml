@@ -21,71 +21,28 @@
 <view class="cartList">
   <view class="cart_title">购物车</view>
   <view class="cart_info">
-    <view class="list_item">
+    <view class="list_item" wx:for="{{carts}}" wx:key="goods_id">
       <view class="check_wrap commom">
-        <checkbox-group>
-          <checkbox> </checkbox>
+        <checkbox-group bindchange="handleItemChange" data-index="{{index}}">
+          <checkbox checked="{{item.checked}}"> </checkbox>
         </checkbox-group>
       </view>
       <view class="img_wrap commom">
-        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
+        <image mode="widthFix" src="{{item.goods_small_logo}}"></image>
       </view>
       <view class="good_info_wrap">
-        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
+        <view class="good_name">{{item.goods_name}}</view>
         <view class="good_tool">
-          <view class="good_price">￥999</view>
+          <view class="good_price">￥{{item.goods_price}}</view>
           <view class="good_nums_wrap">
             <view class="btn_nums commom">-</view>
-            <view class="good_nums">1</view>
+            <view class="good_nums">{{item.num}}</view>
             <view class="btn_nums commom">+</view>
           </view>
         </view>
       </view>
     </view>
 
-    <view class="list_item">
-      <view class="check_wrap commom">
-        <checkbox-group>
-          <checkbox> </checkbox>
-        </checkbox-group>
-      </view>
-      <view class="img_wrap commom">
-        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
-      </view>
-      <view class="good_info_wrap">
-        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
-        <view class="good_tool">
-          <view class="good_price">￥999</view>
-          <view class="good_nums_wrap">
-            <view class="btn_nums commom">-</view>
-            <view class="good_nums">1</view>
-            <view class="btn_nums commom">+</view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="list_item">
-      <view class="check_wrap commom">
-        <checkbox-group>
-          <checkbox> </checkbox>
-        </checkbox-group>
-      </view>
-      <view class="img_wrap commom">
-        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
-      </view>
-      <view class="good_info_wrap">
-        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
-        <view class="good_tool">
-          <view class="good_price">￥999</view>
-          <view class="good_nums_wrap">
-            <view class="btn_nums commom">-</view>
-            <view class="good_nums">1</view>
-            <view class="btn_nums commom">+</view>
-          </view>
-        </view>
-      </view>
-    </view>
   </view>
 </view>
 
@@ -93,15 +50,15 @@
 <view class="bottom_tool">
   <view class="all_check commom">
     <checkbox-group>
-      <checkbox></checkbox>
+      <checkbox checked="{{allChecked}}"></checkbox>
       全选
     </checkbox-group>
   </view>
   <view class="price_info">
     <view>
-      合计 :<text class="all_price">￥{{999}}</text> 
+      合计 :<text class="all_price">￥{{totalPrice}}</text> 
     </view>
     <view class="express">包含运费</view>
   </view>
-  <view class="pay commom">结算({{100}})</view>
+  <view class="pay commom">结算({{totalNums}})</view>
 </view>

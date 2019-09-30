@@ -3,12 +3,14 @@ page {
 }
 .address {
   background-color: #fff;
-  border-radius: 20rpx;
   margin-bottom: 20rpx;
+  height: 140rpx;
+  padding-top: 20rpx;
+  border-radius: 20rpx;
 }
 .address .btn-adress {
   width: 60%;
-  margin: 30rpx auto;
+  margin: auto;
 }
 .address .adress_main {
   display: flex;
@@ -52,6 +54,7 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  overflow: hidden;
 }
 .cartList .cart_info .list_item .good_info_wrap .good_name {
   overflow: hidden;
