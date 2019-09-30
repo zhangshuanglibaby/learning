@@ -83,3 +83,15 @@ export const chooseAddress = () => {
     })
   })
 }
+
+//promise形式的 弹窗
+export const showModal = (params) => {
+  return new Promise((resolve,reject) => {
+    wx.showModal({
+      ...params,
+      success (res) {
+        resolve(res.confirm)
+      }
+    })
+  })
+}

@@ -20,7 +20,8 @@
 <!-- 购物车列表 -->
 <view class="cartList">
   <view class="cart_title">购物车</view>
-  <view class="cart_info">
+
+  <view class="cart_info" wx:if="{{carts.length != 0}}">
     <view class="list_item" wx:for="{{carts}}" wx:key="goods_id">
       <view class="check_wrap commom">
         <checkbox-group bindchange="handleItemChange" data-index="{{index}}">
@@ -35,15 +36,15 @@
         <view class="good_tool">
           <view class="good_price">￥{{item.goods_price}}</view>
           <view class="good_nums_wrap">
-            <view class="btn_nums commom">-</view>
+            <view class="btn_nums commom" bindtap="handleNum" data-operation="{{-1}}" data-index="{{index}}">-</view>
             <view class="good_nums">{{item.num}}</view>
-            <view class="btn_nums commom">+</view>
+            <view class="btn_nums commom" bindtap="handleNum" data-operation="{{1}}" data-index="{{index}}">+</view>
           </view>
         </view>
       </view>
     </view>
-
   </view>
+  <image wx:else mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569880628677&di=df6c3252e585591324fb4ca34d6ef4ac&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fe1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658"></image>
 </view>
 
 <!-- 底部的工具 -->
@@ -56,7 +57,7 @@
   </view>
   <view class="price_info">
     <view>
-      合计 :<text class="all_price">￥{{totalPrice}}</text> 
+      合计 :<text class="all_price">￥{{totalPrice}}</text>
     </view>
     <view class="express">包含运费</view>
   </view>

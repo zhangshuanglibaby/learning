@@ -37,10 +37,23 @@
  *  3 重新赋值
  *  4 重新存储
  *  5 重新计算
+ * 
+ * 6 商品数量的编辑
+ *   1 给数量按钮绑定点击事件
+ *     1 给 “ + ” 和 “ - ”按钮都绑定同一个事件并且传参  + => 1  - => -1
+ *   2 传递索引参数
+ *   3 重新赋值
+ *   4 重新计算
+ * 
+ * 7 商品的数量编辑 -  删除
+ *   1 当用户点击“-” 并且数量=1时
+ *   2 弹出窗口 询问用户 是否要删除
+ *   3 用户点了 “是”
+ *   4 用户点了 “否”
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime'
-import { getSetting,openSetting,chooseAddress } from '../../request/index'
+import { getSetting,openSetting,chooseAddress,showModal } from '../../request/index'
 
 Page({
 
@@ -120,6 +133,9 @@ Page({
       }
     })
 
+    //细节 ，当没有商品时,取消全选
+    allChecked = carts.length === 0 ? false : allChecked
+
     //重新赋值
     this.setData({allChecked,totalPrice,totalNums})
   },
@@ -136,6 +152,29 @@ Page({
     this.setData({carts})
     //重新存储
     wx.setStorageSync('carts', carts);
+    //重新计算
+    this.coundData(carts)
+  },
+
+  //编辑商品数量
+ async handleNum(e) {
+    const {index , operation} = e.target.dataset
+    let {carts} = this.data
+
+    //检测当前如果点击了-,并且数量为1
+  if(operation === -1 && carts[index].num === 1) {
+    const res = await showModal({title: '提示',content: '确认要删除该商品吗?'})
+    if(res) {
+      //点击了确认
+      carts.splice(index,1)
+    }
+  }else {
+    carts[index].num += operation
+  }       
+    //重新赋值
+    this.setData({carts})
+    //重新存储
+    wx.setStorageSync('carts',carts)
     //重新计算
     this.coundData(carts)
   }
