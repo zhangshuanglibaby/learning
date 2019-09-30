@@ -1,15 +1,117 @@
-.btn-adress {
+page {
+  padding: 0 20rpx;
+}
+.address {
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+.address .btn-adress {
   width: 60%;
   margin: 30rpx auto;
 }
-.adress {
+.address .adress_main {
   display: flex;
   justify-content: space-between;
   color: #000;
   font-size: 30rpx;
   padding: 20rpx;
-  border-bottom: 1rpx solid #ff9e1f;
 }
-.adress .adress_info_name {
+.address .adress_main .adress_info_name {
   margin-bottom: 10rpx;
+}
+.cartList .cart_title {
+  color: var(--themeColor);
+  background-color: #fff;
+  padding: 20rpx;
+  font-size: 32rpx;
+  border-bottom: 1px solid currentColor;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+.cartList .cart_info .list_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.cartList .cart_info .list_item .check_wrap {
+  flex: 1;
+}
+.cartList .cart_info .list_item .img_wrap {
+  flex: 2;
+}
+.cartList .cart_info .list_item .img_wrap image {
+  width: 80%;
+}
+.cartList .cart_info .list_item .good_info_wrap {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.cartList .cart_info .list_item .good_info_wrap .good_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-bottom: 15rpx;
+}
+.cartList .cart_info .list_item .good_info_wrap .good_tool {
+  display: flex;
+  justify-content: space-between;
+}
+.cartList .cart_info .list_item .good_info_wrap .good_tool .good_price {
+  font-size: 34rpx;
+  color: var(--themeColor);
+}
+.cartList .cart_info .list_item .good_info_wrap .good_tool .good_nums_wrap {
+  display: flex;
+}
+.cartList .cart_info .list_item .good_info_wrap .good_tool .good_nums_wrap .btn_nums {
+  width: 40rpx;
+  height: 40rpx;
+  border: 1rpx solid #ccc;
+}
+.cartList .cart_info .list_item .good_info_wrap .good_tool .good_nums_wrap .good_nums {
+  margin: 0 20rpx;
+}
+.bottom_tool {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  font-size: 26rpx;
+}
+.bottom_tool .all_check {
+  flex: 3;
+}
+.bottom_tool .price_info {
+  flex: 6;
+  text-align: right;
+  color: #000;
+}
+.bottom_tool .price_info .all_price {
+  color: #ff0000;
+}
+.bottom_tool .price_info .express {
+  font-size: 22rpx;
+  color: #666;
+}
+.bottom_tool .pay {
+  flex: 3;
+  background-color: var(--themeColor);
+  color: #fff;
+  margin-left: 10rpx;
+}
+.commom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

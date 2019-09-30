@@ -3,12 +3,105 @@
   adress可能是对象,可能是空字符串(代表没有false),空字符串则显示按钮
  -->
 
-<button wx:if="{{!adress}}" bindtap="handleGetAddress" type="primary" plain class="btn-adress">获取收获地址</button>
+<!-- 获取收获地址 -->
+<view class="address">
+  <button wx:if="{{!adress}}" bindtap="handleGetAddress" type="primary" plain class="btn-adress">获取收获地址</button>
 
-<view class="adress" wx:else>
-  <view class="adress_info">
-    <view class="adress_info_name">{{adress.userName}}</view>
-    <view>{{adress.detailAdress}}</view>
+  <view class="adress_main" wx:else>
+    <view class="adress_info">
+      <view class="adress_info_name">{{adress.userName}}</view>
+      <view>{{adress.detailAdress}}</view>
+    </view>
+    <view class="tell">{{adress.telNumber}}</view>
   </view>
-  <view class="tell">{{adress.telNumber}}</view>
+
+</view>
+
+<!-- 购物车列表 -->
+<view class="cartList">
+  <view class="cart_title">购物车</view>
+  <view class="cart_info">
+    <view class="list_item">
+      <view class="check_wrap commom">
+        <checkbox-group>
+          <checkbox> </checkbox>
+        </checkbox-group>
+      </view>
+      <view class="img_wrap commom">
+        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
+      </view>
+      <view class="good_info_wrap">
+        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
+        <view class="good_tool">
+          <view class="good_price">￥999</view>
+          <view class="good_nums_wrap">
+            <view class="btn_nums commom">-</view>
+            <view class="good_nums">1</view>
+            <view class="btn_nums commom">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="list_item">
+      <view class="check_wrap commom">
+        <checkbox-group>
+          <checkbox> </checkbox>
+        </checkbox-group>
+      </view>
+      <view class="img_wrap commom">
+        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
+      </view>
+      <view class="good_info_wrap">
+        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
+        <view class="good_tool">
+          <view class="good_price">￥999</view>
+          <view class="good_nums_wrap">
+            <view class="btn_nums commom">-</view>
+            <view class="good_nums">1</view>
+            <view class="btn_nums commom">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="list_item">
+      <view class="check_wrap commom">
+        <checkbox-group>
+          <checkbox> </checkbox>
+        </checkbox-group>
+      </view>
+      <view class="img_wrap commom">
+        <image mode="widthFix" src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg"></image>
+      </view>
+      <view class="good_info_wrap">
+        <view class="good_name">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptas nam provident, impedit, reiciendis nulla enim quod consequatur accusamus atque, dolor labore ipsa sapiente fugit eveniet doloribus veniam nobis explicabo.</view>
+        <view class="good_tool">
+          <view class="good_price">￥999</view>
+          <view class="good_nums_wrap">
+            <view class="btn_nums commom">-</view>
+            <view class="good_nums">1</view>
+            <view class="btn_nums commom">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部的工具 -->
+<view class="bottom_tool">
+  <view class="all_check commom">
+    <checkbox-group>
+      <checkbox></checkbox>
+      全选
+    </checkbox-group>
+  </view>
+  <view class="price_info">
+    <view>
+      合计 :<text class="all_price">￥{{999}}</text> 
+    </view>
+    <view class="express">包含运费</view>
+  </view>
+  <view class="pay commom">结算({{100}})</view>
 </view>
