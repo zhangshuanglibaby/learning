@@ -50,10 +50,16 @@
  *   2 弹出窗口 询问用户 是否要删除
  *   3 用户点了 “是”
  *   4 用户点了 “否”
+ * 
+ * 8 点击结算
+ *   1 判断用户有没有选中购买商品 -- 通过totalNums
+ *   2 判断 用户有没有选择收获地址  -- 通过adress
+ *   3 都满足了 跳转到“支付页面”
+ *   
  */
 
 import regeneratorRuntime from '../../lib/runtime/runtime'
-import { getSetting,openSetting,chooseAddress,showModal } from '../../request/index'
+import { getSetting,openSetting,chooseAddress,showModal,showToast } from '../../request/index'
 
 Page({
 
@@ -72,7 +78,7 @@ Page({
     const adress = wx.getStorageSync('adress')
 
     //获取购物车数据
-    const carts = wx.getStorageSync('carts');
+    const carts = wx.getStorageSync('carts') || [];
       
     //赋值给data
     this.setData({adress,carts})
@@ -177,5 +183,26 @@ Page({
     wx.setStorageSync('carts',carts)
     //重新计算
     this.coundData(carts)
+  },
+
+  //点击结算
+ async handleOrderPay() {
+    const {adress,totalNums} = this.data
+    //如果没有勾选商品
+    if(totalNums === 0) {
+      await showToast({title : "请选择购买商品",icon : "none",mask :true})
+      return;
+    }
+
+    //如果没有选择收获地址,默认是为空字符串布尔值为false
+    if(!adress) {
+      await showToast({title : "请选择收货地址",icon : "none",mask :true})
+      return;
+    }
+
+    //跳转页面
+    wx.navigateTo({
+      url: '/pages/pay/index'
+    });     
   }
 })

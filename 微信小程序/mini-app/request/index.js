@@ -95,3 +95,15 @@ export const showModal = (params) => {
     })
   })
 }
+
+//promise形式的 消息提示
+export const showToast = (params) => {
+  return new Promise((resolve,reject) => {
+    wx.showToast({
+      ...params,
+      success: (result) => {
+        resolve(result)
+      }
+    })
+  })
+}

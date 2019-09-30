@@ -61,5 +61,5 @@
     </view>
     <view class="express">包含运费</view>
   </view>
-  <view class="pay commom">结算({{totalNums}})</view>
+  <view class="pay commom" bindtap="handleOrderPay">结算({{totalNums}})</view>
 </view>
