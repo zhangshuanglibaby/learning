@@ -5,6 +5,15 @@ let requestTimes = 0
 
 //promise形式的 请求的方法
 export const request = (params) => {
+
+  //检测是否需要给请求头携带token ， 通过判断url有没有 /my/
+
+  let header = {...params.header}
+
+  if(params.url.includes('/my/')) {
+    header["Authorization"] = wx.getStorageSync('token')
+  }
+
   //发送了几个,被递增几个
   requestTimes++
   //显示加载
@@ -18,6 +27,7 @@ export const request = (params) => {
   return new Promise((resolve, reject) => {
     wx.request({
       ...params,
+      header,
       url: baseUrl + params.url,
       success(res) {
         // resolve(res)
@@ -105,5 +115,36 @@ export const showToast = (params) => {
         resolve(result)
       }
     })
+  })
+}
+
+//promise形式的 微信登录
+export const wxlogin = () => {
+  return new Promise((resolve,reject) => {
+    wx.login({
+      timeout:10000,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (err) => {
+        reject(err)
+      }
+    });
+      
+  })
+}
+
+//promise形式的 内置支付
+export const requestPayment = (pay) => {
+  return new Promise((resolve,reject) => {
+    wx.requestPayment({
+      ...pay,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (err) => {
+        reject(err)
+      }
+    });     
   })
 }

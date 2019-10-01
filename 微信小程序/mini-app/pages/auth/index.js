@@ -1,66 +1,47 @@
-// pages/auth/index.js
+/**
+ * 1 获取用户token
+ *   1 构成参数
+ *     1  来自于执行小程序的获取用户信息
+ *     2  来自于执行小程序登录后的code
+ *   2 发送给服务器获取token
+ * 
+ * 2 token获取成功后
+ *   1 把token存在本地
+ *   2 返回上一页
+ * 
+ * 
+ */
+import regeneratorRuntime from '../../lib/runtime/runtime'
+import { wxlogin ,request} from '../../request/index'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  //点击授权
+  handleGetuserinfo(e) {
+    //调用获取token的方法
+    this.getToken(e)
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  //获取用户token的方法
+ async getToken(e) {
+    const {code} = await wxlogin()
+    const {encryptedData,iv,rawData,signature} = e.detail
+    
+    //拼接参数
+    const tokenPrams = {
+      code,
+      encryptedData,
+      iv,
+      rawData,
+      signature
+    }
 
-  },
+    //发送请求
+    const res = await request({url : '/users/wxlogin',method : 'post',data :tokenPrams})
+    
+    //把token存在本地
+    wx.setStorageSync('token', res.token);
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    //返回上一页
+    wx.navigateBack({delta: 1});    
   }
 })
