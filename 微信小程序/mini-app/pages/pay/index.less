@@ -1,0 +1,119 @@
+page {
+  padding: 0 20rpx;
+}
+
+.address {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  height: 140rpx;
+  padding-top: 20rpx;
+  border-radius: 20rpx;
+
+  .adress_main {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    font-size: 30rpx;
+    padding: 20rpx;
+
+    .adress_info_name {
+      margin-bottom: 10rpx;
+    }
+  }
+}
+
+.cartList {
+  .cart_title {
+    color: var(--themeColor);
+    background-color: #fff;
+    padding: 20rpx;
+    font-size: 32rpx;
+    border-bottom: 1px solid currentColor;
+    margin-bottom: 20rpx;
+    border-radius: 20rpx;
+  }
+
+  .cart_info {
+    .list_item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 20rpx;
+      margin-bottom: 20rpx;
+
+      .img_wrap {
+        flex: 2;
+        image {
+          width: 80%;
+        }
+      }
+
+      .good_info_wrap {
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        overflow: hidden;
+        .good_name {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          margin-bottom: 15rpx;
+        }
+
+        .good_tool {
+          display: flex;
+          justify-content: space-between;
+          .good_price {
+            font-size: 34rpx;
+            color: var(--themeColor);
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.bottom_tool {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  font-size: 26rpx;
+
+  .price_info {
+    flex: 6;
+    text-align: right;
+    color: #000;
+    .all_price {
+      color: #ff0000;
+    }
+    .express {
+      font-size: 22rpx;
+      color: #666;
+    }
+  }
+
+  .pay {
+    flex: 3;
+    background-color: var(--themeColor);
+    color: #fff;
+    margin-left: 10rpx;
+  }
+   
+}
+
+
+
+.commom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
