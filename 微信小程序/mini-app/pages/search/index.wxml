@@ -1,7 +1,7 @@
 <view class="search">
     <view class="search_wrap">
-        <input type="text" bindinput="handleInput"/>
-        <button size="mini">取消</button>
+        <input type="text" value="{{inputVal}}" bindinput="handleInput" placeholder="请输入你要搜索的商品"/>
+        <button wx:if="{{isShow}}" size="mini" bindtap="handleCancel">取消</button>
     </view>
 
     <view class="search_list">

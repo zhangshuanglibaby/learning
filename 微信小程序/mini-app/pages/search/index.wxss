@@ -9,10 +9,14 @@
 }
 
 .search_wrap input {
-    width: 80%;
+    flex: 1;
     height: 60rpx;
     background-color: #fff;
     padding-left: 30rpx;
+}
+
+.search_wrap button {
+    margin-left: 15rpx;
 }
 
 .search .search_list {
