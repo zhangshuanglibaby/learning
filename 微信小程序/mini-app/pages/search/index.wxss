@@ -1,1 +1,32 @@
-/* pages/search/index.wxss */
+.search {
+    padding: 20rpx 25rpx 0 25rpx;
+}
+
+.search .search_wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+
+.search_wrap input {
+    width: 80%;
+    height: 60rpx;
+    background-color: #fff;
+    padding-left: 30rpx;
+}
+
+.search .search_list {
+    height: calc(100vh - 80rpx);
+}
+
+.search_list navigator {
+    background-color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
+    border-bottom: 1px solid #ccc;
+    font-size: 30rpx;
+    padding: 15rpx;
+}
+
