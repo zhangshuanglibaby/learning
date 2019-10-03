@@ -28,16 +28,28 @@
  * 
  *        4  使用wx.showToast提示加入购物车成功
  * 
+ * 4 点击收藏按钮
+ *   1 绑定tap点击事件
+ *   2 获取到缓存中的 收藏数据 collect || []
+ *   3 判断当前的商品是否被收藏
+ *     1 被收藏了 把该商品从collect中删除
+ *     2 没被收藏 把该商品加入到 collect中
+ *   4 加一些提示
+ *     1 图标变颜色
+ *     2 弹窗提示
+ * 
  */
 import regeneratorRuntime from '../../lib/runtime/runtime'
-import { request} from '../../request/index'
+import { request , showToast} from '../../request/index'
 
 Page({
   data: {
-    detailList: {} //商品详情数据
+    detailList: {}, //商品详情数据
+    isCollect : false
   },
 
   onLoad(options) {
+    // console.log(options)
     this.getDetailList(options.goods_id)
   },
 
@@ -48,6 +60,16 @@ Page({
     this.setData({
       detailList: res
     })
+
+    const {detailList} = this.data
+    // let {isCollect} = this.data
+    const collect = wx.getStorageSync('collect') || [];
+    //判断该商品是否有被收藏
+    const index = collect.findIndex(v => v.goods_id === detailList.goods_id)
+
+    this.setData({isCollect : index === -1 ? false : true})
+    
+
   },
 
   //点击轮播触发预览大图
@@ -93,5 +115,28 @@ Page({
       icon: 'success',
       mask: true
     })
+  },
+
+  //点击收藏
+ async handleItemCollect() {
+
+    const {detailList} = this.data
+
+    //获取缓存中的收藏数据
+    const collect = wx.getStorageSync('collect') || [];
+
+    //判断该商品是否有被收藏
+      const index = collect.findIndex(v => v.goods_id === detailList.goods_id)
+      if(index === -1) {
+        await showToast({title : '收藏成功'})
+        collect.push(detailList)  
+        this.setData({isCollect : true})       
+      }else {
+        await showToast({title : '取消收藏'})
+        collect.splice(index,1)
+        this.setData({isCollect : false}) 
+     }
+
+     wx.setStorageSync('collect', collect);
   }
 })

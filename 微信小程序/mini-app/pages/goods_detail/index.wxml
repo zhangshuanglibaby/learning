@@ -21,7 +21,7 @@
 <view class="collect">
   <view class="collect_name">{{detailList.goods_name}}</view>
   <view class="collect_icon">
-    <view class="iconfont icon-shoucang"></view>
+    <view class="iconfont {{isCollect===true ? 'icon-shoucang1' : 'icon-shoucang'}}" bindtap="handleItemCollect"></view>
     <text>收藏</text>
   </view>
 </view>
@@ -46,7 +46,7 @@
       <button open-type="share"></button>
     <view class="iconfont icon-yixianshi-"></view>
     <text>分享</text>
-  </view>
+  </view> 
   <navigator url="/pages/cart/index" class="tool_item">
     <view class="iconfont icon-gouwuche"></view>
     <text>购物车</text>

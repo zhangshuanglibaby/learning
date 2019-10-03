@@ -44,7 +44,7 @@ Page({
   //获取搜索内容
   async getSearchList(value) {
     const res = await request({url: '/goods/qsearch', data: { query: value}})
-    console.log(res)
+    // console.log(res)
     this.setData({
       searchList: res
     })

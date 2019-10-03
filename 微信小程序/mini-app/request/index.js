@@ -34,9 +34,7 @@ export const request = (params) => {
         // console.log(res)
         if (res.data.meta && res.data.meta.status === 200) {
           resolve(res.data.message)
-        } else {
-          reject(err)
-        }
+        } 
       },
       fail(err) {
         reject(err)
