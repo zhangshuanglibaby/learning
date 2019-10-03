@@ -16,7 +16,8 @@
 }
 
 .search .search_list {
-    height: calc(100vh - 80rpx);
+    height: calc(100vh - 130rpx);
+    overflow: auto;
 }
 
 .search_list navigator {
