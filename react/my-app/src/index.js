@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import Cars from './Cars'
+// import Cars from './Cars'
+import Todos from './Todos'
 
-ReactDOM.render(<Cars />, document.getElementById('root'));
+ReactDOM.render(<Todos />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
