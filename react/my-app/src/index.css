@@ -1,0 +1,21 @@
+.container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn {
+  width: 200px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: rgb(248, 155, 48);
+  margin-top: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+}
+
+span {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+}
